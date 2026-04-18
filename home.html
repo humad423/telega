@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#006398",
+                        "outline": "#6f7881",
+                        "background": "#f8f9fb",
+                        "on-primary-container": "#fdfcff",
+                        "secondary-fixed-dim": "#afcbd8",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary": "#006290",
+                        "on-secondary-container": "#4e6874",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#001e30",
+                        "on-background": "#191c1e",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-dim": "#d8dadc",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#cbe7f5",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary": "#48626e",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed": "#021f29",
+                        "tertiary-fixed": "#cae6ff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#0d7ab9",
+                        "tertiary-container": "#007bb4",
+                        "primary-fixed-dim": "#93ccff",
+                        "surface-container": "#eceef0",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#93ccff",
+                        "tertiary-fixed-dim": "#8dcdff",
+                        "surface": "#f8f9fb",
+                        "primary-fixed": "#cde5ff",
+                        "on-tertiary-fixed-variant": "#004b70",
+                        "on-tertiary-container": "#fcfcff",
+                        "on-primary-fixed": "#001d32",
+                        "surface-bright": "#f8f9fb",
+                        "outline-variant": "#bfc7d2",
+                        "on-surface-variant": "#3f4850",
+                        "secondary-container": "#cbe7f5",
+                        "primary": "#006194",
+                        "on-secondary-fixed-variant": "#304a55",
+                        "on-primary-fixed-variant": "#004b74"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "Tajawal"],
+                        "body": ["Inter", "Tajawal"],
+                        "label": ["Inter", "Tajawal"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .featured-glow {
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.15);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/20">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)]">
+<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full font-['Inter','Tajawal'] antialiased tracking-tight">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-bold tracking-tighter text-sky-700 dark:text-sky-400" href="#">TeleCurator</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sky-700 dark:text-sky-400 font-semibold border-b-2 border-sky-600 pb-1" href="#">Directory</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-sky-600 transition-all duration-300" href="#">Channels</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-sky-600 transition-all duration-300" href="#">Blogs</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-sky-600 transition-all duration-300" href="#">Submit</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<button class="p-2 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8 space-y-16">
+<!-- 1. Top Ad Slider -->
+<section class="relative w-full h-[300px] rounded-xl overflow-hidden group">
+<img alt="Featured Promotion" class="w-full h-full object-cover" data-alt="high-end cinematic shot of a sleek modern workspace with digital screens displaying vibrant data visualizations in a futuristic blue aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByOFvJb5F3VQuvFJQ5BG2zGMvLGL4dI0J-aX-lOahUXIg_TqlHzM0noy4lQiVvim3C8GwGRQHHHYFA_WkgMWa9x6vn39H0dESZdE4u6VZcEOTHoNPlWbWxLfX45bWBmbzQClu6gpOedGspVUQlpmkPcC0qSQO-m30AsRlBM83c6GNjLn-p3DumKlWFoonIcsu4zI-ceIyqfP7htEyYv5g8GCxC2oB9zW-aDP5WCy2401m0au7skVnhW55kIDrAxw12L1sI5yHIe3k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-10">
+<div class="text-white max-w-2xl">
+<h2 class="text-4xl font-extrabold tracking-tight mb-2">Explore the Best of Telegram</h2>
+<p class="text-lg opacity-90">Curated channels, bots, and groups delivered with editorial precision.</p>
+</div>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+<span class="w-8 h-1.5 rounded-full bg-white"></span>
+<span class="w-2 h-1.5 rounded-full bg-white/40"></span>
+<span class="w-2 h-1.5 rounded-full bg-white/40"></span>
+<span class="w-2 h-1.5 rounded-full bg-white/40"></span>
+</div>
+</section>
+<!-- 2. Search & Filters -->
+<section class="space-y-6">
+<div class="flex flex-col md:flex-row gap-4">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-high rounded-lg border-none focus:ring-2 focus:ring-primary/20 transition-all text-on-surface" placeholder="Search for channels, groups or bots..." type="text"/>
+</div>
+<div class="flex items-center bg-surface-container-high rounded-lg px-4 gap-2 min-w-[160px]">
+<span class="material-symbols-outlined text-outline" data-icon="filter_list">filter_list</span>
+<select class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-medium">
+<option>All Types</option>
+<option>Channels</option>
+<option>Groups</option>
+<option>Bots</option>
+</select>
+</div>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+<button class="px-5 py-2 rounded-md bg-secondary-container text-on-secondary-container font-medium text-sm transition-all hover:brightness-95">All Categories</button>
+<button class="px-5 py-2 rounded-md bg-surface-container-high text-on-surface-variant font-medium text-sm transition-all hover:bg-surface-container-highest">Technology</button>
+<button class="px-5 py-2 rounded-md bg-surface-container-high text-on-surface-variant font-medium text-sm transition-all hover:bg-surface-container-highest">Crypto</button>
+<button class="px-5 py-2 rounded-md bg-surface-container-high text-on-surface-variant font-medium text-sm transition-all hover:bg-surface-container-highest">Business</button>
+<button class="px-5 py-2 rounded-md bg-surface-container-high text-on-surface-variant font-medium text-sm transition-all hover:bg-surface-container-highest">News</button>
+<button class="px-5 py-2 rounded-md bg-surface-container-high text-on-surface-variant font-medium text-sm transition-all hover:bg-surface-container-highest">Design</button>
+<button class="px-5 py-2 rounded-md bg-surface-container-high text-on-surface-variant font-medium text-sm transition-all hover:bg-surface-container-highest">Entertainment</button>
+</div>
+</section>
+<!-- 3. Featured Showcase -->
+<section class="space-y-8">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Featured Showcase</h2>
+<p class="text-on-surface-variant mt-1 text-lg">قنوات ومجموعات مميزة</p>
+</div>
+<button class="text-primary font-semibold flex items-center gap-1 hover:underline">
+                    View All <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Featured Item 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 featured-glow flex items-center justify-between group hover:shadow-lg transition-all">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="minimalist aesthetic circular avatar of a stylized blue mountain range at dawn, soft gradients" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOZbduvlK3l6ISiq005I5fRmffL_rhSST89CTkQXMRybwdDjkL4U1OaeuTVd-dskcWUAfz9OPsMs6HeRHqhkbEE40rOJ--6izcBEYXf9Aas3S7PalPkrp3zFA14xHjrSMhI7-_hRoUa3qELQ85MbDFAVzCB2Tj1qJp-obDxIieMaLX4ck6BPVPc20F9mZdB8vEViXzjKezE31s0jXjaYcNs-tN_nnJeu0nnfNUEO4PSLaWTFw0JAsqon-9L39a0spH60Zjb3YxA7E"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-lg">Crypto Pulse Premium</h3>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider">Promoted</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-on-surface-variant mt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="groups">groups</span> 124K</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="category">category</span> Trading</span>
+</div>
+</div>
+</div>
+<a class="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-bold text-sm shadow-sm transition-transform active:scale-95" href="#">Join</a>
+</div>
+<!-- Featured Item 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 featured-glow flex items-center justify-between group hover:shadow-lg transition-all">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="professional modern logo for a news channel, clean typography on a soft gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwXpR0xD8JfqIK6vwQULz3WoJsq6gPkUrkFbFODsCdi-8x84OY_EF6oPIrYkLQMQX7Dxyt0m5eEIT7bp_ll21FWldmw1T99It-6kwc7GDSkKT9y1EtLTTazCVJzirfDhDmXTYbfDdH79LoveV4kBJzxd8Wx2MjNhkDTWJWco-YJE77HtIij0wEsRIQoQW5eXfXSJ_eLwyf_mgWEQ_QtsyS2_diXShpdqJl3I9-6Oc66DIuumepwJHgm_bLXQBDXi-vbK0PNPOPUHw"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-lg">The Tech Insider</h3>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider">Promoted</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-on-surface-variant mt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="groups">groups</span> 89K</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="category">category</span> Tech</span>
+</div>
+</div>
+</div>
+<a class="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-bold text-sm shadow-sm transition-transform active:scale-95" href="#">Join</a>
+</div>
+</div>
+</section>
+<!-- 4. Top Channels -->
+<section class="space-y-8">
+<h2 class="text-2xl font-bold tracking-tight border-l-4 border-primary pl-4">Top Channels</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Channel Card Template -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="vibrant colorful abstract orb representing a creative community" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzlbt-JPHNz51U2RXauv9IZoAVt1ndjD74aaXGjQAEUFKog9aY17437HL2IJDmTAsa47euCPc5Y5bXzY2H3a9wOEN8Tfa3B4z7koW-XFz5TqVEegq-IKVO69KVqeuORw1KC2pr6Hp7xtCBsQDEe2hhNoPYGIlIBMIKIDpvU9Q9mw6Tz2MC-enMvhChUSjjKew12cxLSQa5-F_c99MMhVzclpEZxskNIMup1vprsjq4Ij2TpmttzVww1uIQoCVfmqPpOFXVF-WBFCM"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Design Weekly</h4>
+<p class="text-xs text-on-surface-variant">45K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<!-- Repeat for 8 items total -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="minimalist architectural photo of a modern building in Tokyo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB2vTph0XCDnkoc59RlKckEEG7bKHWd68-B-xT2xLvh3Ec94O-5JvpaxxqZLHNfgH_7IEbftvpRvD91iQwJwUNtf8ZxEvs6ClC2u-2OvrJ4LbsHeRaxxdeaGgRehcBTU7xNIDjMoM4aSEnI2sS457kir4u2q6H2QIuEKF16VPLsvGbJSJ9bM2vi-XQhB5ptIOUqeEUyB9m5WvXvper2Cz9IVImSz-jsCLvAhyO7Ux9Y_4vx9KxBBD68qdEIlXsdSPmOc16njYjiDU"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">World News Hub</h4>
+<p class="text-xs text-on-surface-variant">210K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="close up of green plant leaves in soft focus for a nature and wellness channel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXn5mcJKH5_YhNhp9-n1wbUTY74WlUKInSBR2iui3Sq6E-bsjzJY8bRQxPx3Y-TZC6nGA6Di1fnfN6v2-sTylDQsWMr1W0HNe8uS0HOEanBUzu8b42WtjceFhynPISvzUTjubhzmJtvT4Zy4TRm1175oUTF8Di8Due5HFAN7SkCMAarT7gUmQWAkGozJnh3dlWoTDQzkLhdybw-9HhS0d075do-edxpq6FANnB4aoRWR8gQ8j7_UqSYdIebqBLFpA-qtkn6paUQgQ"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Health &amp; Zen</h4>
+<p class="text-xs text-on-surface-variant">12K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="dark background with glowing code snippets for a developer channel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYM3OXO2iyiXanBiBA6NIj7CGtozgqiIU__YRKOQGVTm7ahI7lE7-w5YaJhTK_diCLPNi8_Nu6KwUyG9V6YkmjxatUJNmEkxM1OYkcI6PG4vLG2lqvVzpK4Rr6J1kYSIXb_eGPfMWcw-svoRqJXZY7uWO03n8HrYInACYwDcXWSbjAPjXiFXB0gtNbKpW41ocseAvciKREldfasHW7bzOKPltHCHVGz89vf1X_bAjgRqQWjimH-rQ34RH7drzrT0UXrk8CxlnZP7M"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Dev Insights</h4>
+<p class="text-xs text-on-surface-variant">67K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="professional photography of a high-end luxury watch on a velvet background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV6oSR_PBkX6KGenHWjAXatd8OL0xTE6Yakphgh-b8qjGRvmn7Lef3-mMZgn8TZZbooNIOWs6162WihtBecKDaYjQsrqMOw1nqm3a7Th5uty1G8yLyGUa_faJKDRq23TCj5j34sdL2ge5j203lMceJlDWnn_VmskGftNybKKDqX6ifLBv51xYsxhwT7G2Uo_AQZ0PISyRg8ga-MLU_gRcZRLxZqzRohIgNCNC4JB4CKIoIrWRjNgWIWAxTueE2Xp6lNIdZborAFsM"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Luxury Living</h4>
+<p class="text-xs text-on-surface-variant">33K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="vibrant neon lights of a futuristic city street at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOVB4Q9auIZ851sQLH6NkdQDNcxKea0b7BZdXedGJjsozdyefIrmo794ZWNtHnyW354SI9rkzFuq4Q1S9WtW8_EDuIDtJPRfxqjGanigh5XJGao7GbSXmpS1YA4-tvCOAppVSqeayA-Y2P44CrdUMpIXK1cIsJNb_6h4PQOVsZw5tbL9UGlAKsUGnG8FEeQtxPvcQjyJ1wrBL_CAyM3eRWOwZTQRtBRVnVDtxSVVhu1Xdv41SRfZhHn-RJGeGqKXyb5GTCEQJzo9o"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Neon Pulse</h4>
+<p class="text-xs text-on-surface-variant">15K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="plate of gourmet pasta in a rustic setting for a food channel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl-UMKE5vIgNDXuQe0kMtP0UXx8a1LnzodMGUipaPSNATZ4ENkaWPfvCaPciluwvYpoc4a-lWy3mMUMm5AlfYviDjleRskco3IH1ypqAu67dxxX1mzciZ8JGktqNFACS8Py3X9JlWjY4j_L1r7w14nIEA4ZWE1q8dw1CRCqiSqux5xiUO0jQt5epZOWvHiM-EN7vWH_D0HsqZpE05BWJcf4VPubWdt9bNdBMRZgmPi8ahNWjUZKrOnf6dYQDnMYeOKWUfqGUgowbo"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Gourmet Guide</h4>
+<p class="text-xs text-on-surface-variant">92K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="CH" class="w-full h-full object-cover" data-alt="close up of a modern digital camera lens reflection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4OD1zqLcfNvHMueSEwgUtE1pgo2ZDX2C7AxZ2kkvAy82DmNn9H9XfcPT3KSLjkWeaPe3sTosTYeya-33tTnVZH4_fGy1l1cmvpOQAlctfy0zM6engxC0-Ueq7LN8B6RfZ_PLorEPpaVj-pPigTulCSW3AvYq1YBmgfMAyGKgJlmN_urzguT8Axo4-01tYXiGDVrE1qop9Tk8dSQ4pNRSgYU749JUabuX6HAiY5wSssTqkPFQjhzPPnM-iVJm4oO-PWYEhx0O-kAo"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Focus Photo</h4>
+<p class="text-xs text-on-surface-variant">28K members</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<button class="text-sm font-bold text-outline uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-2">View All Channels <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></button>
+</section>
+<!-- 5. Active Groups -->
+<section class="space-y-8">
+<h2 class="text-2xl font-bold tracking-tight border-l-4 border-primary pl-4">Active Groups</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Group cards similar to channel cards -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="team of people collaborating on a project in a bright office space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcxMYrKULx3DKEgfHZQFu85Kz_9JQ21dvqvXyXDF3sL0bqYnpKV0xU26sGKoyvm4WFdIbM764kCnB31RIjgP3-H87LRoYmeSNiFrGPUOHfyNq00uOpEbBUSbbo4dBpXjzOubfQmliVpWaWRYYVoG45KioD4yHlmk2zDa2ZoqaMWt214_cQcZq19xlAulY4T2H4tO8af1EZIZY-3HTrXRFNg-giT7MlhqaLZOjPoV-4f8-GC82O6mVhzxqWbQBrDBTAn7xGijT1XYg"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">SaaS Founders</h4>
+<p class="text-xs text-on-surface-variant">8K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<!-- (Skipping repeating 7 more times for brevity but layout is identical) -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="gaming setup with purple neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNQtXyreyhgxIuekS1tGWsb2HebaB-OkWNi6oMdeGvrSvXs2AQi5uLswKKRXzuPMJgzGzWf4J6D4otgjXymqNb5sYvAx81HiHd6CGSbARiYDcbcUDue4V33CHRF3Bh-QY9KJTV4DEYOtccKlFVC1k7RUNJFdapA4bY-H5iGhRVM26OfyHPztzkcYEg642-rBU8pS1liwuT7ObaJLlZMtXGVSVnjkGrbrE1RN94PG1xS5Qn3_oj74rodtf_je2IZR7vE9ywiJ0KZU"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Apex Elite</h4>
+<p class="text-xs text-on-surface-variant">14K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="handshake in a professional business setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1YQ44KF3LktSo_EGI93d72qiCj1RBytgMQeZJuta3sPMyHDARASyE6bYgR8vhxcNfD0SIkBmF9rcoogaEXM_xYsagr9WglbHg9H0k10SczIzwEvYmk6aT4U0z3Ohoq5VZhI-XhdM42xDk0B4w3xVTf3PoxCGHHuL5sRfndObS5WU3H_-K9f6FK3UUaNhTzjdblzvNZFN2-0kXYtpF6LLNo8fR8-eu7NY2UsUG3_EZ-z4U1Ln4TxAaQGW5sXl5rqLhfv68U8OfMrU"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Angel Investors</h4>
+<p class="text-xs text-on-surface-variant">3K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="scenic view of mountains at sunset with a travel backpack" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-EAO74vwlkNKdu4VDVopnjLhYCrWWtjb64lzBf4LQSzkfzi9-Pa42-Qe7kBH8JwyNhmFixnKm1gadkCH4-fCfhQ1OcOP6LWwa1mFISTrEknBF40QsJQ9AXCFiU-Zh1rgCNwIyPbcT836xInMN1djQp9vjKj3fyIWQoHubF5rWfu0TLj7SgViGBtBrsfIN-ZUvEaDr7cCuWMXcsFDaUk_lFEJlX_egU28d_1YKrX6JEqIADbhrQrN4fjUc5C4OnffDhDCGj8JJYnU"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Nomad Life</h4>
+<p class="text-xs text-on-surface-variant">22K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="coffee cup on a wooden table with a notebook" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0TmiewqtRNrhUD0vhzOqNba4ez6Kzhk5cfpyW12kFYdq7KVsygP3dx85nsfSkma7W8LL_TLhaV-NRzRkQq7W42OobP-HPbiwkJmFwWcWl8mr_HnWiZnKhajRbS03uYxPIJIfXyYJjwhzPdTC662k20wfG22jpMRTfQSiXnd0bCJFqUqeEM_GNznN9K8xUJfVPRsKs-iTYa_WiZyVpWEQCUAAUf2UVV8oEEt8X0GEuN-t30nNF_Pgr2ZNC8Pe6SeSAVy2qSJY5wuM"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Creative Chat</h4>
+<p class="text-xs text-on-surface-variant">5K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="stadium with crowd lights at a sports event" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeJ0sxeRaLcLrKnarfZKbxSxh9d6eL00KHdpVTHyi_89ioRkSf4SL7wpSyX66_NJ0ii7qJMYG02lcaElE_fokqJlUDoewQcUvLrMcRVM-AUKjxyjf6vYPQjcw3OHYQYk9qwQVvNgKmcoKIuy8V1F_eO0KClbd6Z7aG9f2j18EBlSDlJygSXTP73FfClOaR1z7jKXa3HTgzUbVH62ZSjpLMxvA84WU3OR_IphGvNn-8IZgIU2PMwDIkmyvWSLYMhMt2UKkKvXYsHRA"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Sports Talk</h4>
+<p class="text-xs text-on-surface-variant">10K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="vinyl record player spinning a disc" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI4BzrgfB7Q_Yci0PP503ji2GTnexuWYNeEz0jjl5T1eIkRWofH4YVuMDownZagzv54OA323B8RZ705WpUb3YkQ6xwNoUiKGxMPYWxMGQ7F0KQBmJc5UPd4XgLPIpxHfzOrgZZhzi9dRBggdRIKVQjBzYtC762viea-lmdL1_n-3q6F370o3nNaw7Xbv59BJLBntwH0zYhV-YGaJuq2b3vUOC3aP7M6WrQHvL-o3j9UHyf2wcBf5f2cBR0-pBnVGzRjrgo2m2Z2dM"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Vinyl Collectors</h4>
+<p class="text-xs text-on-surface-variant">2K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="GR" class="w-full h-full object-cover" data-alt="fitness weights and a yoga mat on a studio floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvkubdQk92noAbUtZ11mp_jW2IogZfVhSOmT6ZeJxAdgDisLKlA_zHKeSZgpZFSNkkhNQIj_oDZgwtjiJYa-3Pvl-ZlHy9KohhSrNYeS3T0ArWbybe3BzTIs6h3CaGBRFU_DafmGJmiIneiySFKV0yHZ3PObhw6p7XKQl_7BXAayC1TraQqlp0_w8bU89FGOCnx4TIz19tgEr2r9lYa_9EMnwK2aywnwnQU_7njvjcjp_yxbWKlNJd-JTIIhbcWNl9RJ3a_MYlrN4"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Fit Community</h4>
+<p class="text-xs text-on-surface-variant">30K active</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</div>
+</div>
+<button class="text-sm font-bold text-outline uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-2">View All Groups <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></button>
+</section>
+<!-- 6. Useful Bots -->
+<section class="space-y-8">
+<h2 class="text-2xl font-bold tracking-tight border-l-4 border-primary pl-4">Useful Bots</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="friendly robot character mascot icon in a blue circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfeZHO8SpJ8789_3PMSLEcX5si_7hBSI_Ka-e1tGF-AaSVMfecDVRounkQrlUcTs5YJ8C3n9QRBndDkgWsC15Yv8bPrSZUZ-xaB9IkYHRQEvo8IMrEUs6n4F8Wwu__LHMX0Zfup8uHYLHILDkk5uFzuNc6hI70K-ZlbU0DrMQEotb7sgzpDBmK7rpV1EQt3s9iHXmpLkZe2dDn81vZ5d0BkaYY3-8GEWUiRbSaczhL0VLFzlpQMbhE1zHyiFpUp2WE0U0RKug4hh4"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Translate Bot</h4>
+<p class="text-xs text-on-surface-variant">Tool</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<!-- Repeat for bots -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="stylized gear and graph icon for a management bot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5yG8gUioUCLq3Zajn5aAGHGPuAu_7whMphQSjZqmz-QiqA2fmNEyjX9YYH8_FB4uxds5YXh8x_PAdYY0maezy-lgNdoIOsD0aXSfoGvbpol6Ilma0XQZoLn_VN8O2CLam7h8IaDW5rJBzwkfZ7DtS25Z44witm66N0Y4VNYSPP5KUklb5WiPmZpeJgfHkPVYHVKhXU35yV_q1b-v7XuTtphf_0IHbpmfmmt24dziC4_ue7NyqthomzJRESEFL6aaZRGA8GDBJaxE"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Admin Master</h4>
+<p class="text-xs text-on-surface-variant">Admin</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="dollar sign with a digital currency circuit background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ2w5e0tVpHOx1EyWCFV92maeVMh2HhlW7XVDG4GGgnqxkkzYxZza9NWB_1z4T_xGxhU9KRR8kmuJbw8Gg4JZmyrTttjWGBZOdVyOc-OtGAwIsFt_6KrP7IyPRotRzHI4BNkJb3OFio3u-nltCeP39YoNN6XqRuDfWS56SfmSG1zKJB79IXvgC84bky-ThTPcA1nQ_XjgANGb9NzatOzOjAhAhpI0IyCpXhkmBjcKRW5W1SOxpKpt7zF4dirL4LffGJUJiKAwDVtU"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Price Alert</h4>
+<p class="text-xs text-on-surface-variant">Crypto</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="stylized envelope with wings for a file converter bot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKNXlqgtNotsaMZBJIBqYCmZ1HO2fbgC9Z90-AgUbweiVIj433lo1kOGp9grCtQI9IBjAZwFq0q1mSp8oRhHV7yzx7PJbiWYpL3VenpFlmeMZVMG0dIFt07VYTD2-lR6NtqdxXwpKxI4Bu8wif8iAZ3jcMHEGYPC2boCbxA8V_n2JDo_LJgng0gHleziiR5B9aVnVtO4u-yGAnpFRthGhaVTGgT-i3P8wk6yHL-zRZbZPTuIoBHsB_BHfKDN8gND-b_4GVzuSx42c"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">File Magic</h4>
+<p class="text-xs text-on-surface-variant">Utility</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="calendar icon with a glowing bell for reminders" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYcNjUMG3wP2xSzCL9jyJplUNZWBoEjkPBdJh5R6TOicsKK4KWrYC3EWGYejJ1VAYwh0lr-1d4gF7TmTqMMu5mZdILplCo-EzILDnYWu22sg4fLQwz42bSt6yLHMsZxwMCkaZM-tQm4KtvBQSing1meB7lx2YpCfEFby2VWALB4zRujuu4dc1Sma4LNK3Oow_5ERQ9Rn7ujWBOB4-9pOXqxviaC3AkLpzthVIW5MOqu1Kl3NPpdhkdtNgdImoYv5KuSHe1nVc9o_8"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Reminder Pro</h4>
+<p class="text-xs text-on-surface-variant">Productivity</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="game controller icon in a sleek digital design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-WmtUkbOjgH3gCv8843GAOejEleRXhr54Yj6WllWPyOiVD9EZzUqZXujNF7YJYPevvZp2_QcHJunJW_op-aIrelIl2-7-W2bCtfmUwbW2YTIzGs9rGtVvZD-Smd0dvrfx8NHWBpZlCppiQaM1YLTz6Ple7LqAqSX9LAujgZvP1cSn186qZH0Bwc63OsvJcwCzNB9SK2zKO6nxDegkG0sRi-N6ODZODEWw65ul-jT2FHKPlxQr9bFE4h4AdOYpHhvjUTfWEuNdHjA"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Game Finder</h4>
+<p class="text-xs text-on-surface-variant">Gaming</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="music note with digital sound waves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQrtTq6Qc2EA5M14E3qafp2mMpmSoJK3xLbT_mYgvobq_dZJ_kZjwqyo1axlEaXYlDISShlBE-M4SFSY-bfZ2lRaHTguU8UVOZHHciKhPGvVbQbrv0dl2aKJPuSK2TPtoxsgbfxITFfFh6E4-RPimOLjmDzo0yFEJpLtTpguGXArW7XQ1HJIuJJeI5crimsl-Dtd96aIswGHLjx6x2fa969huZ8a1fFQAe0qSurSBuDI-agBzWTjo4zb4Pdg7FlDwHWhS-PyGddDE"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Music Stream</h4>
+<p class="text-xs text-on-surface-variant">Entertainment</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/15 flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="BOT" class="w-full h-full object-cover" data-alt="magnifying glass over a folder icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtLIzSla-idPDqz0Po_3S_NhBmodxZrKIGFckySCnY84quuAE2_riQzujK4L-KXgtCfEKB3b5E33il1-ey78JqJpljcHNff_feJfZH42F-xWqEz0PNrpMqLS1USuFrWWt5XloKFRPOKmryghxiS7Age4m823i1m2mJeLCal1lyuDgtGhBRzbnZWsYVSSmQcWn2aXI7kUUIal4vO36ajIImQyod_hLRUa-0-zzrDBMGAltXnyZjiT4ZGaSZYqbPPoHHewAXtBsxn_k"/>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">File Search</h4>
+<p class="text-xs text-on-surface-variant">Tools</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-md bg-surface-container text-primary font-bold text-xs uppercase hover:bg-primary hover:text-white transition-colors">Start</button>
+</div>
+</div>
+<button class="text-sm font-bold text-outline uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-2">View All Bots <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200/15 dark:border-slate-800/15 bg-slate-50 dark:bg-slate-950">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-bold text-lg text-slate-900 dark:text-white">TeleCurator</span>
+<p class="text-sm font-['Inter','Tajawal'] text-slate-500 dark:text-slate-400">© 2024 TeleCurator. All rights reserved.</p>
+</div>
+<nav class="flex gap-8">
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-medium" href="#">About</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-medium" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-medium" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-medium" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Digital Curator | Blog &amp; Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Tajawal:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#0d7ab9",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#fcfcff",
+                        "tertiary-fixed-dim": "#8dcdff",
+                        "tertiary-container": "#007bb4",
+                        "secondary-fixed-dim": "#afcbd8",
+                        "surface": "#f8f9fb",
+                        "on-secondary-container": "#4e6874",
+                        "on-primary-container": "#fdfcff",
+                        "secondary-container": "#cbe7f5",
+                        "outline-variant": "#bfc7d2",
+                        "on-primary-fixed-variant": "#004b74",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#006398",
+                        "primary": "#006194",
+                        "on-secondary-fixed": "#021f29",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#cde5ff",
+                        "tertiary": "#006290",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#001d32",
+                        "on-tertiary-fixed-variant": "#004b70",
+                        "inverse-primary": "#93ccff",
+                        "on-tertiary-fixed": "#001e30",
+                        "outline": "#6f7881",
+                        "surface-container": "#eceef0",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#93ccff",
+                        "background": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9fb",
+                        "secondary": "#48626e",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#cae6ff",
+                        "on-surface-variant": "#3f4850",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#cbe7f5",
+                        "on-secondary-fixed-variant": "#304a55"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "Tajawal"],
+                        "body": ["Inter", "Tajawal"],
+                        "label": ["Inter", "Tajawal"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', 'Tajawal', sans-serif; background-color: #f8f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-effect { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+        .masonry-item { break-inside: avoid; margin-bottom: 2rem; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="text-on-surface antialiased selection:bg-primary-container selection:text-white">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)]">
+<nav class="flex items-center justify-between px-6 py-3 max-w-7xl mx-auto rtl:flex-row-reverse">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#006194] dark:text-sky-400">The Digital Curator</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all" href="#">Channels</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all" href="#">Groups</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all" href="#">Bots</a>
+<a class="text-[#006194] dark:text-sky-400 font-semibold border-b-2 border-[#006194] pb-1" href="#">Blog</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-high rounded-full px-4 py-1.5 focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search directory..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100/50 rounded-full transition-all text-slate-600">
+<span class="material-symbols-outlined">language</span>
+</button>
+<button class="p-2 hover:bg-slate-100/50 rounded-full transition-all text-slate-600">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="ml-2 px-5 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-full text-sm font-semibold hover:shadow-lg transition-all active:scale-95">
+                        Login
+                    </button>
+</div>
+</div>
+</nav>
+</header>
+<main class="pt-24 pb-20 px-6 max-w-7xl mx-auto">
+<!-- Top Ad Zone -->
+<div class="mb-12 w-full h-32 bg-surface-container flex items-center justify-center rounded-xl border border-dashed border-outline-variant overflow-hidden group">
+<span class="text-outline text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity">AD-ZONE: LEADERBOARD</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Main Content Area (Blog Archive) -->
+<div class="lg:col-span-8">
+<header class="mb-10">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-on-surface">Curated Insights</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">In-depth analysis of the Telegram ecosystem, growth strategies, and digital publishing trends.</p>
+</header>
+<!-- Featured Article -->
+<article class="relative mb-16 rounded-2xl overflow-hidden group bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="aspect-[21/9] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="vibrant abstract digital network connections with glowing nodes and soft blue bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1lPB4pUBU3B1NOx0VxkKsfpTCKLgM7aYEJeXFAaism45CFctMMMWKDgHypozndbfX9mFWxwl2IF8NlwPlnN63mSd17F7uq3G_dvKyBMTS207p0rthOMvw1OTTOsfz7y0VQO-AkPiAw1i_jGM4tvIm4Fmm_nWJLR2MrQRLyi5qGrzL5ScRKeDP9mCP8UmuqXQVGCW_KYSdLhM1H-GI4Zo9Y8rLv5HRGKN0H8EW0BhlX95KnJ48tS5HNbihAL9zWlHiZQArx1syJik"/>
+</div>
+<div class="p-8">
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase">Deep Dive</span>
+<span class="text-on-surface-variant text-xs font-medium">12 Min Read • May 24, 2024</span>
+</div>
+<h2 class="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">The Evolution of Private Communities: Why Telegram is the New Substack</h2>
+<p class="text-on-surface-variant mb-6 line-clamp-2">How creators are leveraging automated bots and subscription models to turn messaging channels into profitable media businesses...</p>
+<a class="inline-flex items-center text-primary font-bold gap-2 group/btn" href="#article-detail">
+                            Read Full Analysis
+                            <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Masonry/Grid Archive -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:translate-y-[-4px] transition-all duration-300">
+<div class="aspect-video rounded-lg overflow-hidden mb-5">
+<img class="w-full h-full object-cover" data-alt="close-up of a high-tech smartphone screen showing intricate UI data visualizations with soft purple lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyy30a4pSPUVrL88H17FR-Oh-Pl4GZY_Uv3bcNCQ9d2fcWi0OOzDpIPMoSNmnwzPbiQauMSnvEYtHk_PpsOscv1rbkKLnjichcNoaweqyNxxrfhomtcXjFtVZ_0f3VQj8Fg8H-iANji-vu12qihXQitG-4ddjPkCEwROf5RRtZJkvsuj2g4S5cYxoY_C7ihgJPsjtEN532rTYV4gStSfxDe_7Cgj3U6dzblFGrVIODiYc2vBYfIYP3UC2IvYcuF3WHvuT8zT7pTgI"/>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase mb-3 inline-block">Marketing</span>
+<h3 class="text-xl font-bold mb-2">Mastering the Art of Telegram SEO</h3>
+<p class="text-sm text-on-surface-variant mb-4">Discover how global search works inside the app and how to rank your channel...</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-outline">By Alex Rivera</span>
+<span class="material-symbols-outlined text-primary text-xl">bookmark_add</span>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:translate-y-[-4px] transition-all duration-300">
+<div class="aspect-video rounded-lg overflow-hidden mb-5">
+<img class="w-full h-full object-cover" data-alt="minimalist white desk setup with a sleek laptop and a small succulent plant in soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiVXsG94cieNjnbEinveqM-BPlkH9MSuN_Skwf02Gfrm3AbLvu4TVR-kO2TVQOd2ZAZWJCQQnhFn66LVNVwbkqshodMXluHmSUHI7dS0t0brOhw1NSAm3W54zbQi_7hUxpT7kpCECEwXJBSCCpuItamA5m6MIZKBKxlqj-CWeXT9BfBQW6JUBjh1w-qAHo08IM8ZzBUxwmAERvpemVR1vgselDh8eoGVB1vH_u5TUurMeKMb-7nTETHjQipfx_IBQRCQbcwi30q14"/>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase mb-3 inline-block">Productivity</span>
+<h3 class="text-xl font-bold mb-2">Top 10 Bots for Channel Admins</h3>
+<p class="text-sm text-on-surface-variant mb-4">Automate your content pipeline with these essential open-source tools...</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-outline">By Sarah Chen</span>
+<span class="material-symbols-outlined text-primary text-xl">bookmark_add</span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:translate-y-[-4px] transition-all duration-300">
+<div class="aspect-video rounded-lg overflow-hidden mb-5">
+<img class="w-full h-full object-cover" data-alt="abstract digital art showing streams of binary data flowing through a stylized cloud icon with blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGwizZJTx0ZQ8pYHUFpLatK7J7HDHxdAhcigadFdh94deh33_lGTbAz2eZpOXBv74zE9K5VKSZxnmhBJW2wtYqfxgVA0zcbdFiifr_cldDGnPaytMdhflSog4K8OrxPShsjXfI5b-XgOFIm000ochYpEs5e0-YPmZr9KKjYrpCvme5LJYkNywiaHhulncz3X_U0aRFdgqnDbgk3lzSIsDZfN4FkzOdjXX-bGEgLDOO2wVxMcHa3cASAonBTH4aibI4XutUnQxbLfY"/>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase mb-3 inline-block">Security</span>
+<h3 class="text-xl font-bold mb-2">Privacy Protocols for Public Channels</h3>
+<p class="text-sm text-on-surface-variant mb-4">Protecting your members and maintaining integrity in high-growth environments...</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-outline">By Marco Vieri</span>
+<span class="material-symbols-outlined text-primary text-xl">bookmark_add</span>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:translate-y-[-4px] transition-all duration-300">
+<div class="aspect-video rounded-lg overflow-hidden mb-5">
+<img class="w-full h-full object-cover" data-alt="dark creative studio background with neon blue light glowing on metallic textures and tech equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7aNNLpC21TeAVgmHpAnfpYgdwqxVPO0JKWL4WP5zhV75O7S7csx2DkKdkbLIT1BKYQKZ9_7E16dLsHQ0TP4UN5HH9FxmjHLnZDlvzc1lh65fFTursP6Yq0P52hzAwdh9LwP-ZZPq7Y9YbHUbehafUA5UGqjhEIqxShD-wG7rJIyXnCs6yCynkElFLMk2bG-Fg_SHySpNBYbiZzDv0_HSf_9NbK4zEbGJuZv6MwyspLcrhcbrdfG-8o2ZujEr4ht7x5TTI3Lc6pdo"/>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase mb-3 inline-block">Trends</span>
+<h3 class="text-xl font-bold mb-2">The Rise of TON: Blockchain Ads</h3>
+<p class="text-sm text-on-surface-variant mb-4">Exploring the new monetization layer launched by the Telegram foundation...</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-outline">By Editorial Team</span>
+<span class="material-symbols-outlined text-primary text-xl">bookmark_add</span>
+</div>
+</article>
+</div>
+<!-- Bottom Ad Zone -->
+<div class="mt-16 w-full h-24 bg-surface-container-low flex items-center justify-center rounded-xl border border-dashed border-outline-variant group">
+<span class="text-outline text-xs font-bold tracking-widest uppercase opacity-40">AD-ZONE: HORIZONTAL</span>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 space-y-10">
+<!-- Sidebar Ad Zone -->
+<div class="w-full aspect-[4/5] bg-surface-container flex items-center justify-center rounded-xl border border-dashed border-outline-variant overflow-hidden">
+<span class="text-outline text-xs font-bold tracking-widest uppercase opacity-40">AD-ZONE: SIDEBAR</span>
+</div>
+<!-- Trending Categories -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+<h4 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                        Trending Topics
+                    </h4>
+<div class="flex flex-wrap gap-2">
+<a class="px-4 py-2 bg-surface-container-high hover:bg-primary-fixed hover:text-on-primary-fixed rounded-full text-xs font-semibold transition-all" href="#">Crypto Channels</a>
+<a class="px-4 py-2 bg-surface-container-high hover:bg-primary-fixed hover:text-on-primary-fixed rounded-full text-xs font-semibold transition-all" href="#">Bot Tutorials</a>
+<a class="px-4 py-2 bg-surface-container-high hover:bg-primary-fixed hover:text-on-primary-fixed rounded-full text-xs font-semibold transition-all" href="#">Privacy</a>
+<a class="px-4 py-2 bg-surface-container-high hover:bg-primary-fixed hover:text-on-primary-fixed rounded-full text-xs font-semibold transition-all" href="#">Monetization</a>
+<a class="px-4 py-2 bg-surface-container-high hover:bg-primary-fixed hover:text-on-primary-fixed rounded-full text-xs font-semibold transition-all" href="#">Case Studies</a>
+<a class="px-4 py-2 bg-surface-container-high hover:bg-primary-fixed hover:text-on-primary-fixed rounded-full text-xs font-semibold transition-all" href="#">API Guides</a>
+</div>
+</div>
+<!-- Newsletter -->
+<div class="bg-primary text-white rounded-2xl p-8 relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-xl font-bold mb-2">Weekly Curated Digest</h4>
+<p class="text-primary-fixed text-sm mb-6">Join 12,000+ admins getting the latest ecosystem updates directly.</p>
+<input class="w-full px-4 py-3 rounded-lg bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-white mb-4" placeholder="email@address.com" type="email"/>
+<button class="w-full py-3 bg-white text-primary rounded-lg font-bold hover:bg-primary-fixed transition-colors">Subscribe Now</button>
+</div>
+<!-- Decor -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary-container rounded-full blur-3xl opacity-50"></div>
+</div>
+</aside>
+</div>
+<!-- Article Detail Layout (Simulation) -->
+<div class="mt-32 max-w-[800px] mx-auto border-t border-surface-container-highest pt-20" id="article-detail">
+<header class="mb-12 text-center">
+<span class="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Article Detail View</span>
+<h1 class="text-4xl md:text-5xl font-black tracking-tighter leading-tight text-on-surface mb-8">Building a Scalable Content Strategy for Large Telegram Groups</h1>
+<div class="flex items-center justify-center gap-4 text-on-surface-variant text-sm">
+<img class="w-10 h-10 rounded-full" data-alt="professional headshot of a smiling man with glasses in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdnkcJX7LLq6JYSUJP6h-SxL3dxy-aSI6o9lC_xEnR7jJ0hUtiWo_R-qM9U_wuNDfyra9768Fx5HVHn1KVq6huXsZgQF_zofGsSUiYXXfDlqy0zoEb_LoUQMXvTDW4HnL9ZHFEtO7N20z1xP-KBZkavc4WJRWC1aVDBdXFB0hD9W59aniWRYaskeHQV0z3jnReu5oEqcuylZP9JBGHkGRAEpl4N_G7FwB3yctlmEs9RAcM7DKI9S9Yf7sTILS9RxcHqhO_qWMSDK4"/>
+<div class="text-left">
+<p class="font-bold text-on-surface">Alex Rivera</p>
+<p class="text-xs">Senior Ecosystem Strategist</p>
+</div>
+<div class="h-8 w-px bg-surface-container-highest mx-4"></div>
+<time>May 24, 2024</time>
+</div>
+</header>
+<div class="prose prose-lg prose-slate max-w-none text-on-surface-variant leading-relaxed space-y-8">
+<p>The transition from a small hobbyist group to a massive broadcasting channel requires more than just high-quality content; it requires a structural shift in how you handle data, member interaction, and automated moderation.</p>
+<p>In the following guide, we'll break down the three pillars of channel scalability: automated delivery, tiered moderation, and semantic tagging. Most admins fail when they try to manually manage a community exceeding 50,000 members.</p>
+<!-- Embedded Telegram Card Component -->
+<div class="bg-surface-container-low rounded-2xl p-6 my-10 border border-surface-container-highest relative group">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-white overflow-hidden shadow-md">
+<span class="material-symbols-outlined scale-[2]" data-weight="fill">hub</span>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white rounded-full p-1 border-2 border-white">
+<span class="material-symbols-outlined text-[10px]" data-weight="fill">verified</span>
+</div>
+</div>
+<div class="flex-1">
+<h5 class="text-on-surface font-bold text-lg flex items-center gap-1">Curator Alpha Feed</h5>
+<p class="text-xs text-on-surface-variant mb-2">@curator_alpha • 84.2k Subscribers</p>
+<div class="flex gap-2">
+<span class="text-[10px] bg-white px-2 py-0.5 rounded border border-surface-container-highest">AI News</span>
+<span class="text-[10px] bg-white px-2 py-0.5 rounded border border-surface-container-highest">Tech</span>
+</div>
+</div>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-sm hover:shadow-lg transition-all active:scale-95">
+                            Join Channel
+                        </button>
+</div>
+<div class="mt-4 pt-4 border-t border-white/50 text-sm italic opacity-80">
+                        "The fastest growing hub for tech insiders. Daily drops at 09:00 UTC."
+                    </div>
+</div>
+<h3 class="text-2xl font-bold text-on-surface">1. The Role of Automated Delivery</h3>
+<p>Managing high-velocity content schedules manually is a recipe for burnout. The modern curator utilizes scheduled JSON injections via the Telegram API or third-party wrappers like ControllerBot. This allows for time-zone optimization without requiring 24/7 presence.</p>
+<p>Furthermore, utilizing **inline buttons** for "Share" and "React" actions has been shown to increase engagement by up to 45% compared to raw text posts.</p>
+</div>
+<!-- Author & Share -->
+<footer class="mt-20 pt-10 border-t border-surface-container-highest flex flex-col md:flex-row md:items-center justify-between gap-8">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-container-low transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-sm">share</span>
+                        Share Article
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-container-low transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-sm">chat_bubble</span>
+                        42 Comments
+                    </button>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-outline">FOLLOW US</span>
+<div class="flex gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">send</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">rss_feed</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full py-12 px-6 mt-auto border-t border-slate-200/50 dark:border-slate-800/50">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto rtl:text-right">
+<div class="col-span-1 md:col-span-1">
+<span class="font-bold text-slate-900 dark:text-white text-lg block mb-4">The Digital Curator</span>
+<p class="font-['Inter','Tajawal'] text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-6">© 2024 The Digital Curator. Editorial Telegram Directory. Your gateway to the most premium digital communities.</p>
+</div>
+<div>
+<h5 class="font-bold text-xs uppercase tracking-widest mb-4">Explore</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Submit Channel</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Premium Listings</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Directory API</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-xs uppercase tracking-widest mb-4">Company</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">About Us</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-xs uppercase tracking-widest mb-4">Resources</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Admin Blog</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Bot Directory</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] text-xs transition-colors" href="#">Advertise</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

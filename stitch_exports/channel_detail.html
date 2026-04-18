@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Digital Curator - Channel Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Tajawal:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#0d7ab9",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#fcfcff",
+                        "tertiary-fixed-dim": "#8dcdff",
+                        "tertiary-container": "#007bb4",
+                        "secondary-fixed-dim": "#afcbd8",
+                        "surface": "#f8f9fb",
+                        "on-secondary-container": "#4e6874",
+                        "on-primary-container": "#fdfcff",
+                        "secondary-container": "#cbe7f5",
+                        "outline-variant": "#bfc7d2",
+                        "on-primary-fixed-variant": "#004b74",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#006398",
+                        "primary": "#006194",
+                        "on-secondary-fixed": "#021f29",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#cde5ff",
+                        "tertiary": "#006290",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#001d32",
+                        "on-tertiary-fixed-variant": "#004b70",
+                        "inverse-primary": "#93ccff",
+                        "on-tertiary-fixed": "#001e30",
+                        "outline": "#6f7881",
+                        "surface-container": "#eceef0",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#93ccff",
+                        "background": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9fb",
+                        "secondary": "#48626e",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#cae6ff",
+                        "on-surface-variant": "#3f4850",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#cbe7f5",
+                        "on-secondary-fixed-variant": "#304a55"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "Tajawal"],
+                        "body": ["Inter", "Tajawal"],
+                        "label": ["Inter", "Tajawal"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            shadow-[0px_16px_48px_rgba(0,29,50,0.06)];
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)] font-['Inter','Tajawal'] antialiased tracking-tight">
+<div class="flex items-center justify-between px-6 py-3 max-w-full mx-auto rtl:flex-row-reverse">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#006194] dark:text-sky-400">The Digital Curator</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all duration-300" href="#">Channels</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all duration-300" href="#">Groups</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all duration-300" href="#">Bots</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006194] transition-all duration-300" href="#">Blog</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-surface-container-high rounded-full px-4 py-1.5 focus-within:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search curated content..." type="text"/>
+</div>
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all" data-icon="language">language</button>
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all" data-icon="dark_mode">dark_mode</button>
+<button class="px-5 py-1.5 text-sm font-semibold text-[#006194] hover:bg-sky-50 rounded-full transition-all">Login</button>
+</div>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section with Blurred Background -->
+<section class="relative h-[450px] w-full overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background z-10"></div>
+<img class="w-full h-full object-cover blur-3xl scale-110 opacity-40" data-alt="abstract artistic background with flowing blue and gold silk textures and soft cinematic bokeh lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATaABi5AroDN9LtqC2WCTruVcv_V6UQftz801tImCoHn3KquPszScIpIFEFxYV81Cthcc3c7z4q4hvu482HUedMYvuSpWtT9bFHEK8g83jmYhPVaHN6qh6-cBQYvm2AhxWiwALFfynf6xCYngjLl4RaSSoAezPz81LxG44a2hXvlNzKQJQVYohoMhpge71cpF-loJH3410RY8j20SWOQnWCCIJr1mOhjl0EzoG8PTMYbJjjOMBHJGtabJyHramxsvT1byWNlzje-E"/>
+</div>
+<div class="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl">
+<div class="w-32 h-32 rounded-full p-1 bg-white shadow-2xl mb-8">
+<img class="w-full h-full object-cover rounded-full" data-alt="professional profile avatar of a tech curator with a clean studio lighting and neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5EYgX5PBciymycuaeu3rcfdWx0lPnEwS2IVPvvJR9qeaW8TOtcstiVUjnUDwk2ghMvtSso26myB2XJ-5ACRNHXbBz6WAT2UmDxpLzfWbET5S1OPw_0ryHDlFL82xr5fLvnMaiZD61NTDA5GGu0y2MNlldkLeqCk3DPBPP_HYXfI6XB1lhj_q0ntSxzrfeESDr_T2DbYLR7lmEb6AJ4wL9DsUISODWgAytcZCXSwOn4Rk0X14gRgct8w2M1USLlwSIiqBzvaBb1-c"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface">Tech Insights Daily</h1>
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="text-lg text-on-surface-variant max-w-2xl mb-8 leading-relaxed">
+                    The ultimate destination for daily deep-dives into the world of AI, Web3, and emerging hardware. Curated by industry veterans for curious minds.
+                </p>
+<button class="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-full shadow-lg hover:shadow-primary/20 scale-100 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+                    Open in Telegram
+                </button>
+</div>
+</section>
+<!-- Information Block (Bento Style Grid) -->
+<section class="max-w-7xl mx-auto px-6 -mt-12 relative z-30">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)] flex flex-col items-center text-center">
+<span class="text-primary-container font-bold text-2xl mb-1">142.5K</span>
+<span class="text-xs uppercase tracking-widest text-on-surface-variant font-semibold">Subscribers</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)] flex flex-col items-center text-center border-b-2 border-primary/10">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="category">category</span>
+<span class="text-sm font-bold text-on-surface">Technology</span>
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Category</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)] flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="translate">translate</span>
+<span class="text-sm font-bold text-on-surface">English / Arabic</span>
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Languages</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)] flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="update">update</span>
+<span class="text-sm font-bold text-on-surface">2 hours ago</span>
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Last Updated</span>
+</div>
+</div>
+</section>
+<!-- Content & Sidebar Layout -->
+<section class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Main Content Area -->
+<div class="lg:col-span-8 space-y-12">
+<!-- AD ZONE: Top -->
+<div class="w-full h-32 bg-surface-container-high rounded-xl flex items-center justify-center border-2 border-dashed border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"></div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/50 font-bold mb-2">Advertisement</span>
+<span class="text-sm font-medium text-on-surface-variant">Promote your channel here</span>
+</div>
+</div>
+<div class="space-y-6">
+<h2 class="text-2xl font-extrabold tracking-tight text-on-surface">Related Curations</h2>
+<!-- Channel Cards (Horizontal Style) -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Horizontal Card 1 -->
+<div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-14 rounded-full object-cover border border-slate-100" data-alt="AI Research Bot profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhgmj5HF7rWh_93jUKlt54KNu8gboBGwmja_nmrLbqmyR2qzRVfV_3YTLBD2A1MRrS-JbrsqkXeEzvpt-0XvaA-8i7gtl_sg9kbC2G81lxqKaC94bWsWtqa0USwNwTHHEAo4gfCdN915x5m5e4EaSAiZmFUEmBs7ugGlNrpawe9SHcVNLrKvhjvjClzS5X4CQzNP4KVeTVdqceznVM_TQnRLzZKrpqSPydJ8_onZ57pBALrx9cDz48UWMVwf7kKa4J4mLjzwIqtQw"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5 mb-1">
+<h3 class="font-bold text-on-surface text-base truncate group-hover:text-primary transition-colors">AI Research Bot</h3>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-[10px] font-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-md uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs" data-icon="smart_toy">smart_toy</span>
+<span>Bot</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+<span>12.4k users</span>
+</div>
+</div>
+</div>
+</div>
+<button class="px-6 py-2 text-sm font-bold rounded-full bg-[#0088cc] text-white hover:bg-[#0077b5] transition-colors">Join</button>
+</div>
+<!-- Horizontal Card 2 -->
+<div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-14 rounded-full object-cover border border-slate-100" data-alt="Dev Talk Global profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX_TY9uWNEZGpK8OHpgikzq2iyPnSJ9SU_vNyl5nxgJVLr8xNPt1YS0m_fQsT7XWwnC0zd4yD3YDgjo1oFjleR_7oNrz7FwFi162nyfyUxLFfwRZiQWWCNW-jVJDiiriRyXTWGTeF2CAQqBVtkAFXnJw32J2faTODP44bWCXV1fSGge_pXhqG2I_UowZr8qkjBT3l-eOZbRKoS-oYzo4J5y3n5uMsHV3wUi-ujPgUktNdSCh4DS6yjYLkmHLOqk0PSk2FwSzAqMDA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5 mb-1">
+<h3 class="font-bold text-on-surface text-base truncate group-hover:text-primary transition-colors">Dev Talk Global</h3>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-[10px] font-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-md uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs" data-icon="groups">groups</span>
+<span>Group</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+<span>89.1k members</span>
+</div>
+</div>
+</div>
+</div>
+<button class="px-6 py-2 text-sm font-bold rounded-full bg-[#0088cc] text-white hover:bg-[#0077b5] transition-colors">Join</button>
+</div>
+<!-- Horizontal Card 3 -->
+<div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-14 rounded-full object-cover border border-slate-100" data-alt="Crypto Pulse profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgX-KUh5ijDMTxmNkqNz1Yl8zOP8VXJt1DGVcDb5y49rhr_fKb0QruiQeCGWs_FWNvnWGpa1_79l6tntnUPHKjgN5YQtlKyLLJehpYO0tNlhrDEoYDKFs3xr9JzTAnXFApYkF_6V0E-cQy7kaP1ZBOwwkUX2PIWarKO3hT4SV8zJn-A8VrEeaKstY3NoTGV5MxXPdD2pOuc97sHbvWDekdNndgMroVB4ic3Shqdz9Pwq2TPGKimlvbqrGhq8csl4ulfal8jZU8gd8"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5 mb-1">
+<h3 class="font-bold text-on-surface text-base truncate group-hover:text-primary transition-colors">Crypto Pulse</h3>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-[10px] font-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-md uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs" data-icon="podcasts">podcasts</span>
+<span>Channel</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+<span>256k subscribers</span>
+</div>
+</div>
+</div>
+</div>
+<button class="px-6 py-2 text-sm font-bold rounded-full bg-[#0088cc] text-white hover:bg-[#0077b5] transition-colors">Join</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 space-y-8">
+<!-- AD ZONE: Sidebar -->
+<div class="w-full h-64 bg-slate-900 rounded-2xl p-6 relative overflow-hidden flex flex-col justify-end">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="vibrant abstract gradient background with flowing indigo and violet colors and smooth grainy texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApXlwF8jF1UFhcXTdfyqAAM5WZDIhMHvu7SVBpixzdfOQYKvmjKSeOfIu36WLecKSHcCWoXCTwpOHS3mdE14YAWZL-24jwXvpoU9_C8SPxpDvJmLgAAc7BVRwUei1YqA2po8Tz7okE4pws06AnjfqJdquSZdKzMh4YWkrvUoQGGILNmsU2EM8EjabdJw9BwCkfmixrLRGTS9ShnFG2uJJwH8yoVV1d5eMRQFOH3DTaZaEng2Fd3EM5zQDXwbBqLE3WC7HgzElLaSY"/>
+<div class="relative z-10">
+<span class="text-[10px] font-bold text-white/50 uppercase tracking-widest block mb-2">Sponsored</span>
+<h4 class="text-white font-bold text-lg mb-4">Master AI in 30 Days. Join the elite workshop.</h4>
+<button class="w-full py-3 bg-white text-slate-900 font-bold rounded-xl text-sm hover:bg-sky-50 transition-colors">Learn More</button>
+</div>
+</div>
+<!-- Stats/Extra Info -->
+<div class="bg-surface-container-low rounded-2xl p-6 space-y-6">
+<h3 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface">Community Metrics</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Growth (30d)</span>
+<span class="text-sm font-bold text-emerald-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                                +4.2%
+                            </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Engagement Rate</span>
+<span class="text-sm font-bold text-on-surface">12.8%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Safety Score</span>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-sm font-bold text-on-surface">Verified Safe</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/30">
+<button class="w-full flex items-center justify-center gap-2 py-3 border border-outline-variant text-on-surface text-sm font-bold rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+                            Share Channel
+                        </button>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-12 px-6 mt-auto border-t border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950 font-['Inter','Tajawal'] text-xs text-slate-500 dark:text-slate-400">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto rtl:text-right">
+<div class="col-span-1 md:col-span-1">
+<span class="font-bold text-slate-900 dark:text-white text-lg block mb-4">The Digital Curator</span>
+<p class="leading-relaxed opacity-80">
+                    Discovering the best of Telegram through editorial precision and human-led curation.
+                </p>
+</div>
+<div class="col-span-1">
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Explore</h4>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-[#006194] transition-colors" href="#">About Us</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] transition-colors" href="#">Submit Channel</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] transition-colors" href="#">Advertise</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-[#006194] transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-400 hover:text-[#006194] transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Stay Connected</h4>
+<div class="flex gap-4">
+<button class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="alternate_email">alternate_email</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="rss_feed">rss_feed</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200/50 dark:border-slate-800/50 text-center opacity-60">
+            © 2024 The Digital Curator. Editorial Telegram Directory.
+        </div>
+</footer>
+</body></html>

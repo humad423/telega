@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Tajawal:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#6f7881",
+              "surface-container": "#eceef0",
+              "secondary-container": "#cbe7f5",
+              "inverse-primary": "#93ccff",
+              "tertiary-fixed": "#cae6ff",
+              "on-surface-variant": "#3f4850",
+              "surface-container-highest": "#e0e3e5",
+              "on-secondary-fixed-variant": "#304a55",
+              "on-primary": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-container-high": "#e6e8ea",
+              "primary-container": "#0d7ab9",
+              "surface-variant": "#e0e3e5",
+              "primary-fixed-dim": "#93ccff",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#afcbd8",
+              "on-tertiary-fixed-variant": "#004b70",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#f8f9fb",
+              "primary-fixed": "#cde5ff",
+              "inverse-on-surface": "#eff1f3",
+              "on-primary-fixed-variant": "#004b74",
+              "tertiary-fixed-dim": "#8dcdff",
+              "inverse-surface": "#2d3133",
+              "tertiary-container": "#007bb4",
+              "outline-variant": "#bfc7d2",
+              "background": "#f8f9fb",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed": "#021f29",
+              "on-primary-container": "#fdfcff",
+              "on-tertiary-container": "#fcfcff",
+              "surface-tint": "#006398",
+              "on-secondary-container": "#4e6874",
+              "primary": "#006194",
+              "tertiary": "#006290",
+              "surface-container-low": "#f2f4f6",
+              "on-background": "#191c1e",
+              "surface": "#f8f9fb",
+              "secondary": "#48626e",
+              "secondary-fixed": "#cbe7f5",
+              "on-primary-fixed": "#001d32",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#001e30",
+              "on-surface": "#191c1e",
+              "on-secondary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Inter", "Tajawal"],
+              "body": ["Inter", "Tajawal"],
+              "label": ["Inter", "Tajawal"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', 'Tajawal', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0px_16px_48px_rgba(0,29,50,0.06)]">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-slate-50">TeleCurator</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-sky-600 dark:text-sky-400 font-bold border-b-2 border-sky-600 pb-1 font-['Inter'] text-sm tracking-tight" href="#">Channels</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all font-['Inter'] text-sm tracking-tight" href="#">Groups</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all font-['Inter'] text-sm tracking-tight" href="#">Bots</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all font-['Inter'] text-sm tracking-tight" href="#">Blog</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden lg:flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-lg">search</span>
+<span>Search directory...</span>
+</button>
+<div class="flex gap-2">
+<button class="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-all">Sign In</button>
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-6 py-2 rounded-full text-sm font-bold shadow-md hover:scale-[1.02] active:scale-95 transition-all">Submit Channel</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-8">
+<!-- Sidebar: Advanced Filters -->
+<aside class="w-full md:w-72 flex-shrink-0">
+<div class="sticky top-24 bg-slate-50 dark:bg-slate-950 rounded-2xl flex flex-col gap-6 p-6">
+<div>
+<h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 font-['Inter']">Advanced Filters</h2>
+<p class="text-xs text-slate-500 font-medium">Refine your curation</p>
+</div>
+<!-- Categories -->
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="category">category</span>
+<span class="text-xs uppercase tracking-wider">Categories</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Technology</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Cryptocurrency</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">News &amp; Media</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Lifestyle</span>
+</label>
+</div>
+</div>
+<!-- Languages -->
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="language">language</span>
+<span class="text-xs uppercase tracking-wider">Languages</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">English</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Arabic</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 group-hover:text-primary transition-colors">Spanish</span>
+</label>
+</div>
+</div>
+<!-- Member Count Range -->
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="group">group</span>
+<span class="text-xs uppercase tracking-wider">Member Count</span>
+</div>
+<div class="px-2">
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="1000000" min="0" step="10000" type="range"/>
+<div class="flex justify-between mt-2 text-[10px] font-bold text-slate-400">
+<span>0</span>
+<span>1M+</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-slate-900 text-white py-3 rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors mt-4">
+                    Apply Filters
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 space-y-8">
+<!-- Breadcrumbs & Sort -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<nav class="flex items-center gap-2 text-sm">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-slate-300 text-xs">chevron_right</span>
+<span class="text-slate-900 font-semibold">Channels</span>
+</nav>
+<div class="flex items-center gap-3">
+<span class="text-sm text-slate-500 font-medium">Sort By:</span>
+<select class="bg-surface-container-low border-none rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-primary/20 cursor-pointer">
+<option>Most Members</option>
+<option>Newest First</option>
+<option>Highest Growth</option>
+<option>Top Rated</option>
+</select>
+</div>
+</div>
+<!-- Channels Grid (Horizontal Cards) -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Card 1 -->
+<div class="group bg-surface-container-lowest p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 transition-all hover:shadow-[0px_16px_48px_rgba(0,29,50,0.06)] hover:-translate-y-0.5 border border-outline-variant/15">
+<div class="relative w-20 h-20 flex-shrink-0">
+<img alt="Channel Avatar" class="w-full h-full rounded-full object-cover shadow-sm" data-alt="Abstract vibrant digital wave pattern in neon blue and purple colors representing a modern tech channel brand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDjhhuNV-paWaxL4MCUhcRtwyn8DEhQSSczZ4HWMyuFES_KHv33iiaNamMc8QD-TTye0mJLL0E0p1zmyOD_DsEbRI8uPtdBt_upe2ohyGtyWp3h2mUVuMMZbu_rqbgmI4Vq-A7_8jG4Q_8GT69wF5AT7wNQ5_bxrrevhFDrKJd8MER0DVF1to9DcQzNMNGy9m5Y1HD-Up6tsUN_erEkvnBXmUwqdsxW9A-p_AuIMOwy_Zl9yp_Oby4Mu2govRfQbs-B1nV59li1nE"/>
+<div class="absolute -bottom-1 -right-1 bg-white p-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+<h3 class="text-lg font-bold text-slate-900 font-['Inter']">TechPulse Daily</h3>
+<span class="inline-block px-2.5 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-wider rounded-md w-fit mx-auto sm:mx-0">Technology</span>
+</div>
+<p class="text-sm text-slate-500 line-clamp-2 max-w-lg">Your daily dose of silicon valley insights, breakthrough AI research, and gadget reviews curated by industry veterans.</p>
+<div class="flex items-center justify-center sm:justify-start gap-4 mt-3 text-xs font-bold text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>245.8K Members</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-emerald-500">trending_up</span>
+<span class="text-emerald-500">+1.2% growth</span>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-8 py-3 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-95">Join Channel</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-lowest p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 transition-all hover:shadow-[0px_16px_48px_rgba(0,29,50,0.06)] hover:-translate-y-0.5 border border-outline-variant/15">
+<div class="relative w-20 h-20 flex-shrink-0">
+<img alt="Channel Avatar" class="w-full h-full rounded-full object-cover shadow-sm" data-alt="Digital representation of blockchain nodes connecting in a deep blue 3D space with soft glowing particles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc6lAvBZ0mAGA1vu1zSvbl3ftVT_YgXaU9ZgiZKN0a6NWLjkz3BE9FpqjbPYhewvBnb3RqJzkJZt1cjvat5qq9LO-8PVf6MbxH1HTPwuGwrAmZ9B1gOX_ttpPqKU4j90bZYY0zrJ-aQpKWu4WPQg-HhAmO0i4UBI_bZV3l2J0zGUqjTTBV87LdBnMUA5Q8snYf8_Ydv2xMszcZRbmcj9hz6QgVDCZM1GkfxyctyD16fwAeGBJf3RIoUane3fUq1MO4NKguIXmCqhE"/>
+<div class="absolute -bottom-1 -right-1 bg-white p-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+<h3 class="text-lg font-bold text-slate-900 font-['Inter']">CryptoWhale Alerts</h3>
+<span class="inline-block px-2.5 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-wider rounded-md w-fit mx-auto sm:mx-0">Cryptocurrency</span>
+</div>
+<p class="text-sm text-slate-500 line-clamp-2 max-w-lg">Real-time alerts on significant blockchain movements and deep-dive technical analysis for Bitcoin and Ethereum investors.</p>
+<div class="flex items-center justify-center sm:justify-start gap-4 mt-3 text-xs font-bold text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>182.4K Members</span>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+<span>Stable growth</span>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-8 py-3 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-95">Join Channel</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-lowest p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 transition-all hover:shadow-[0px_16px_48px_rgba(0,29,50,0.06)] hover:-translate-y-0.5 border border-outline-variant/15">
+<div class="relative w-20 h-20 flex-shrink-0">
+<img alt="Channel Avatar" class="w-full h-full rounded-full object-cover shadow-sm" data-alt="Cinematic shot of a newspaper roll on a wooden table with morning sunlight through a window, soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx5vmyUdULBSPaFDuMuntuZ80ehKXwX6h60-Q6FjLLEO0IdKAnAXwO_owjkbjp5PFTNEwKEf2wbidqrMCejiPAWJ3uwKGcmm4cbDBI7QS4cXzLlk1JNZ7NDtoI8MtVtCgg8M7KEkGEhwwEVCUx-MeNdyZ2MXM8ImOYv1lrHh9tKSstytIgxW6xF3_nk0wdIBg-Je4CKf9JXlgNjkfV0fMA-n0GVJ0yvUPNjCcKtY7hwMhte3fKwgO7_3fcLHOA_ruOq_WxK3uGn_c"/>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+<h3 class="text-lg font-bold text-slate-900 font-['Inter']">Global Briefing</h3>
+<span class="inline-block px-2.5 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-wider rounded-md w-fit mx-auto sm:mx-0">News &amp; Media</span>
+</div>
+<p class="text-sm text-slate-500 line-clamp-2 max-w-lg">Unbiased, factual news summaries from around the world. We cut through the noise to bring you what actually matters.</p>
+<div class="flex items-center justify-center sm:justify-start gap-4 mt-3 text-xs font-bold text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>52.1K Members</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-emerald-500">trending_up</span>
+<span class="text-emerald-500">+3.5% growth</span>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-8 py-3 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-95">Join Channel</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-container-lowest p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 transition-all hover:shadow-[0px_16px_48px_rgba(0,29,50,0.06)] hover:-translate-y-0.5 border border-outline-variant/15">
+<div class="relative w-20 h-20 flex-shrink-0">
+<img alt="Channel Avatar" class="w-full h-full rounded-full object-cover shadow-sm" data-alt="Clean minimalist workspace with a laptop, white desk, and a small green plant in a ceramic pot, natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDob9ZMHTzNv__JBj8--PUpX5VfT2VhMsVRHQ2QMS06H6zOEKOK_9tj47_SmpJ73CVwQRbXIMy7L1rFFeynhq-AN6zHDVOyHQdVqkgBthZJ7d6YY3ebVKDw7W2Tz890KB54-gZJOr47eDubEL30r7sYfky0gJUF8FipHb-4uEgTsYK2onML_F3LTesXCtOaqkgCJqJNI0t5pxTFQh2I97W4axdcRWAJeTSAl-0YW3xLqtRuELa5mlzsKcIKghEDFDdw6r9JwUlYnU"/>
+<div class="absolute -bottom-1 -right-1 bg-white p-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+<h3 class="text-lg font-bold text-slate-900 font-['Inter']">Minimalist Coding</h3>
+<span class="inline-block px-2.5 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-wider rounded-md w-fit mx-auto sm:mx-0">Technology</span>
+</div>
+<p class="text-sm text-slate-500 line-clamp-2 max-w-lg">Weekly programming tips focused on clean code, architecture patterns, and the latest in web development frameworks.</p>
+<div class="flex items-center justify-center sm:justify-start gap-4 mt-3 text-xs font-bold text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>31.4K Members</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-emerald-500">trending_up</span>
+<span class="text-emerald-500">+0.8% growth</span>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-8 py-3 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-95">Join Channel</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center pt-8">
+<button class="flex items-center gap-3 px-10 py-4 bg-white border border-outline-variant/30 rounded-2xl text-sm font-bold text-slate-700 hover:bg-slate-50 hover:border-primary/30 hover:text-primary transition-all group">
+<span>Load More Channels</span>
+<span class="material-symbols-outlined text-lg group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-8 max-w-7xl mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-bold text-slate-900 dark:text-slate-50 text-xl tracking-tighter">TeleCurator</span>
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-slate-400">© 2024 The Digital Curator. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-slate-400 hover:text-sky-500 underline transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-slate-400 hover:text-sky-500 underline transition-colors" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-slate-400 hover:text-sky-500 underline transition-colors" href="#">Advertise</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-slate-400 hover:text-sky-500 underline transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

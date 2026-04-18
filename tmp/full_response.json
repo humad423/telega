@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "result": {
+    "id": -1001005640892,
+    "title": "Telegram News",
+    "username": "telegram",
+    "type": "channel",
+    "active_usernames": [
+      "telegram"
+    ],
+    "description": "The official Telegram on Telegram. Much recursion. Very Telegram. Wow.",
+    "can_send_gift": true,
+    "has_visible_history": true,
+    "can_send_paid_media": true,
+    "accepted_gift_types": {
+      "unlimited_gifts": true,
+      "limited_gifts": true,
+      "unique_gifts": true,
+      "premium_subscription": true,
+      "gifts_from_channels": true
+    },
+    "photo": {
+      "small_file_id": "AQADAQADFqkxG1TZ8EQACAIAA0QTau8W____eZVOlUsOM0E7BA",
+      "small_file_unique_id": "AQADFqkxG1TZ8EQAAQ",
+      "big_file_id": "AQADAQADFqkxG1TZ8EQACAMAA0QTau8W____eZVOlUsOM0E7BA",
+      "big_file_unique_id": "AQADFqkxG1TZ8EQB"
+    },
+    "available_reactions": [],
+    "max_reaction_count": 11,
+    "accent_color_id": 4
+  }
+}

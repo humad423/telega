@@ -1,0 +1,60 @@
+import { createClient } from '@/utils/supabase/server';
+import { notFound } from 'next/navigation';
+import { getDictionary } from '@/lib/i18n';
+
+export default async function StaticPage({ 
+    params 
+}: { 
+    params: { locale: string, slug: string } | Promise<{ locale: string, slug: string }>
+}) {
+    const resolvedParams = await Promise.resolve(params);
+    const { locale, slug } = resolvedParams;
+    const dict = await getDictionary(locale);
+    const supabase = await createClient();
+
+    const { data: page } = await supabase
+        .from('pages')
+        .select('*')
+        .eq('slug', slug)
+        .eq('locale', locale)
+        .single();
+
+    if (!page) notFound();
+
+    return (
+        <main className="pt-32 pb-20 px-6 max-w-[800px] mx-auto min-h-screen">
+            <header className="mb-12 border-b border-outline-variant/10 pb-8">
+                <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white uppercase mb-4">
+                    {page.title}
+                </h1>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    Last Updated: {new Date(page.created_at).toLocaleDateString(locale)}
+                </p>
+            </header>
+
+            <div className="prose prose-lg prose-slate dark:prose-invert max-w-none font-['Inter','Tajawal']">
+                {renderContent(page.content)}
+            </div>
+        </main>
+    );
+}
+
+function renderContent(content: any) {
+    if (!content) return null;
+    if (typeof content === 'string') return <div dangerouslySetInnerHTML={{ __html: content }} />;
+    
+    // Simplified JSON to HTML for static pages
+    if (content.type === 'doc' && Array.isArray(content.content)) {
+        return content.content.map((node: any, idx: number) => {
+            if (node.type === 'paragraph') {
+                return <p key={idx} className="mb-6 leading-relaxed">{node.content?.map((c: any) => c.text).join('')}</p>;
+            }
+            if (node.type === 'heading') {
+                const Tag = `h${node.attrs?.level || 2}` as any;
+                return <Tag key={idx} className="font-black tracking-tight mt-10 mb-4">{node.content?.[0]?.text}</Tag>;
+            }
+            return null;
+        });
+    }
+    return null;
+}

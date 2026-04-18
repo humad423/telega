@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Dashboard - The Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Tajawal:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#0d7ab9",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#fcfcff",
+                        "tertiary-fixed-dim": "#8dcdff",
+                        "tertiary-container": "#007bb4",
+                        "secondary-fixed-dim": "#afcbd8",
+                        "surface": "#f8f9fb",
+                        "on-secondary-container": "#4e6874",
+                        "on-primary-container": "#fdfcff",
+                        "secondary-container": "#cbe7f5",
+                        "outline-variant": "#bfc7d2",
+                        "on-primary-fixed-variant": "#004b74",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#006398",
+                        "primary": "#006194",
+                        "on-secondary-fixed": "#021f29",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#cde5ff",
+                        "tertiary": "#006290",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#001d32",
+                        "on-tertiary-fixed-variant": "#004b70",
+                        "inverse-primary": "#93ccff",
+                        "on-tertiary-fixed": "#001e30",
+                        "outline": "#6f7881",
+                        "surface-container": "#eceef0",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#93ccff",
+                        "background": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9fb",
+                        "secondary": "#48626e",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#cae6ff",
+                        "on-surface-variant": "#3f4850",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#cbe7f5",
+                        "on-secondary-fixed-variant": "#304a55"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "Tajawal", "sans-serif"],
+                        "body": ["Inter", "Tajawal", "sans-serif"],
+                        "label": ["Inter", "Tajawal", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-sidebar {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex min-h-screen overflow-hidden">
+<!-- SideNavBar (The Anchor) -->
+<aside class="hidden md:flex flex-col h-screen w-64 glass-sidebar bg-slate-50/80 border-r border-outline-variant/15 p-4 gap-2 z-40 fixed left-0 top-0 rtl:right-0 rtl:left-auto rtl:border-l rtl:border-r-0">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-slate-900 leading-tight">Admin Panel</h2>
+<p class="text-xs font-medium text-slate-500">Directory Management</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 overflow-y-auto no-scrollbar flex-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-sky-100 text-[#006194] rounded-xl font-medium transition-transform duration-200 hover:translate-x-1 rtl:hover:-translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-xl font-medium transition-transform duration-200 hover:translate-x-1 rtl:hover:-translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-xl font-medium transition-transform duration-200 hover:translate-x-1 rtl:hover:-translate-x-1" href="#">
+<span class="material-symbols-outlined">add_task</span>
+<span>Channel Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-xl font-medium transition-transform duration-200 hover:translate-x-1 rtl:hover:-translate-x-1" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Blog</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-xl font-medium transition-transform duration-200 hover:translate-x-1 rtl:hover:-translate-x-1" href="#">
+<span class="material-symbols-outlined">ads_click</span>
+<span>Ads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-xl font-medium transition-transform duration-200 hover:translate-x-1 rtl:hover:-translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/15">
+<button class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-full font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                    Create New Post
+                </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 rtl:md:ml-0 rtl:md:mr-64 transition-all duration-300">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 md:left-64 rtl:md:left-0 rtl:md:right-64 h-16 bg-white/70 backdrop-blur-xl z-30 flex items-center justify-between px-8 shadow-[0px_16px_48px_rgba(0,29,50,0.06)]">
+<h1 class="text-xl font-bold tracking-tighter text-[#006194]">The Digital Curator</h1>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-surface-container-high rounded-full px-4 py-1.5 focus-within:bg-white focus-within:ring-2 ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-medium" placeholder="Search directory..." type="text"/>
+</div>
+<button class="p-2 rounded-full hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">language</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional male admin avatar wearing glasses with a friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaOD-7o1jyPK2j-_xdD8jHs7D5zbyW8vWl7e89YzzOuvF7B6Gqoc0oaS9h1lDvYrCXYL6kdyABK9sOvb-pjfFHcdpOqba8xtnXfNAp_ijLK50bleaOOneF_Lfpr6DU1f15h-ykKde8eRBS2R6F94xxr4-zcf63R6paFI5mX7vJzk13FdfvfGNVFTqdTEOd152hrXDehSSgjBB59P7ndcPf281isPJJWms4YH-8txir2iEeXakIgHmhB6o3xKp9HNad3vgymLYo8tI"/>
+</div>
+</div>
+</header>
+<div class="mt-16 p-6 lg:p-10 max-w-7xl mx-auto space-y-12">
+<!-- Add Channel Wizard (Editorial Flow) -->
+<section>
+<div class="mb-8">
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Submit New Channel</h2>
+<p class="text-on-surface-variant mt-1">Grow your audience by listing your channel in our premium directory.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Wizard Form Canvas -->
+<div class="lg:col-span-7 space-y-6">
+<div class="bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_16px_48px_rgba(0,29,50,0.04)] border border-outline-variant/10">
+<!-- Steps Indicator -->
+<div class="flex items-center justify-between mb-10 relative">
+<div class="absolute top-1/2 left-0 right-0 h-0.5 bg-surface-container-high -z-10 -translate-y-1/2"></div>
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold ring-4 ring-white">1</div>
+<span class="text-xs font-bold text-primary">Identity</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-outline flex items-center justify-center text-sm font-bold ring-4 ring-white">2</div>
+<span class="text-xs font-bold text-outline">Curation</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-outline flex items-center justify-center text-sm font-bold ring-4 ring-white">3</div>
+<span class="text-xs font-bold text-outline">Submit</span>
+</div>
+</div>
+<div class="space-y-8">
+<!-- Step 1: URL Input -->
+<div class="space-y-4">
+<label class="block text-sm font-bold tracking-wide uppercase text-on-surface-variant">Channel URL</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline font-medium">t.me/</span>
+<input class="w-full pl-16 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-white text-on-surface font-medium transition-all" placeholder="channel_username" type="text"/>
+</div>
+<p class="text-xs text-outline italic">Enter the public username of your Telegram channel or group.</p>
+</div>
+<!-- Step 3: Meta Data -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<label class="block text-sm font-bold tracking-wide uppercase text-on-surface-variant">Category</label>
+<select class="w-full p-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 font-medium">
+<option>Technology</option>
+<option>Crypto &amp; Finance</option>
+<option>Design &amp; Arts</option>
+<option>News &amp; Media</option>
+</select>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-bold tracking-wide uppercase text-on-surface-variant">Primary Language</label>
+<select class="w-full p-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 font-medium">
+<option>English</option>
+<option>Arabic</option>
+<option>Spanish</option>
+<option>French</option>
+</select>
+</div>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="px-8 py-3.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-bold shadow-xl shadow-primary/25 hover:scale-105 transition-transform">
+                                            Confirm Submission
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2: Live Preview Area (Asymmetric Placement) -->
+<div class="lg:col-span-5 sticky top-24">
+<div class="space-y-4">
+<h3 class="text-sm font-bold tracking-widest uppercase text-outline flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                    Live Preview
+                                </h3>
+<!-- Channel Card Component -->
+<div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0px_16px_48px_rgba(0,29,50,0.06)] border border-outline-variant/5 hover:border-primary/20 transition-all duration-300">
+<div class="h-24 bg-gradient-to-r from-sky-400 to-primary-container relative">
+<div class="absolute -bottom-8 left-6">
+<div class="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg bg-white">
+<img class="w-full h-full object-cover" data-alt="vibrant minimalist vector logo for a technology telegram channel featuring abstract circuit patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCraT5Lv3xCfNg7KnDABUXZ1pXIqz1nRkTYEI-SpF376nuFzQd7-LIWOJwhqRUJ86sZ-fyY-I_O9ojsJayxXshLkQ3UimBW9yIun5j5HDjpHq0vS-IkiEDPdAdSTXfVsHVf-xtnpkifqZ5m3LxY3bYTHQhDhzWN_DQbniTitPCElAlYswtzObB9Zjnr6fOts27eOiw03kpA9fSfZCa-1JfIOhix0VJn0QYthBs_Ft46yRWE4Ar3eV50oNl9WSKT2sL1HrY3vkZ9K0o"/>
+</div>
+</div>
+</div>
+<div class="p-6 pt-10">
+<div class="flex items-center gap-2 mb-2">
+<h4 class="text-xl font-bold tracking-tight text-on-surface">Tech Curator HQ</h4>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">Daily insights into the world of AI, Web Development, and Digital Trends. Curated for professionals.</p>
+<div class="flex items-center justify-between mt-auto">
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold tracking-widest uppercase rounded-md">
+                                                TECHNOLOGY
+                                            </div>
+<div class="flex items-center gap-1 text-outline font-medium text-xs">
+<span class="material-symbols-outlined text-xs">group</span>
+                                                12.4k members
+                                            </div>
+</div>
+</div>
+<!-- Sponsored Glow Overlay -->
+<div class="absolute inset-0 bg-radial-gradient from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+</div>
+<div class="bg-primary/5 rounded-xl p-4 border border-primary/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl">info</span>
+<p class="text-xs leading-relaxed text-[#004b74]">This is a real-time visualization of how your channel will appear in the "Technology" section of our organic search results.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Management Table (The "No-Line" Table) -->
+<section class="space-y-6">
+<div class="flex items-end justify-between border-b border-surface-container-highest pb-4">
+<div>
+<h2 class="text-2xl font-bold text-on-surface">Your Channels</h2>
+<p class="text-on-surface-variant text-sm">Monitor and manage your active listings.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-highest text-on-surface text-sm font-semibold rounded-lg hover:bg-surface-container-high transition-colors">Export</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-primary-container transition-colors">Bulk Action</button>
+</div>
+</div>
+<div class="overflow-x-auto rounded-2xl bg-surface-container-low p-1">
+<table class="w-full border-separate border-spacing-0">
+<thead>
+<tr>
+<th class="px-6 py-4 text-left rtl:text-right text-[10px] font-bold tracking-widest uppercase text-outline">Channel Entity</th>
+<th class="px-6 py-4 text-left rtl:text-right text-[10px] font-bold tracking-widest uppercase text-outline">Performance</th>
+<th class="px-6 py-4 text-left rtl:text-right text-[10px] font-bold tracking-widest uppercase text-outline">Status</th>
+<th class="px-6 py-4 text-right rtl:text-left text-[10px] font-bold tracking-widest uppercase text-outline">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/30">
+<!-- Row 1 -->
+<tr class="bg-surface-container-lowest group hover:bg-surface-container transition-colors">
+<td class="px-6 py-4 first:rounded-l-xl last:rounded-r-xl rtl:first:rounded-r-xl rtl:first:rounded-l-none rtl:last:rounded-l-xl rtl:last:rounded-r-none">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="minimalist health and wellness channel logo with a calming green leaf motif" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxXoYm86lwm0llPWzUFoNRG5_uOubT6vJ4loyxL7oHg3s05eqyhaiGYYkBjs6-gRH26bzyTgGfhGPTd4Gz4XeXiEKnjOYed7vYNkBo8F5J6NkINkapWUgH-5dBtFTaoXVA3_QXS6ITUcqP9huJYDgh1JmwCgqGgE9s3vrsRdTCsnaMnU3Q4rLn4SxcrSjbOwVGYRlfXm9pS7OlJDN1S1h2YbBcTsT-gzUqgT8m89Wu8h5OAufIuZ-4saEZdakvNRPMNZbGTlnnbCM"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Health &amp; Vitality</div>
+<div class="text-xs text-outline font-medium">@health_vitality</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-on-surface">4.8k</span>
+<span class="text-[10px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded font-bold">+12%</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 rounded-full text-[10px] font-black tracking-wide uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+                                            Live
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right rtl:text-left">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-white/50 group hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="bold modern security channel icon with a stylized shield symbol in metallic blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgwz5TK66fx-XRKngoWfVKtIiM9m3i1R6vWla8xw3IjU3S813bunO4I17FshXjPaZCYiKhwbm83oTIL608btqzpfQh1bE9U3lX_pdHn30OfgGc6FyFu1zdgVHv1vDkB9LNtz6HiRFODgYY7n4OlrhSvqM0HroFgnlFIeYaQq6UZI4d7wEoh1obOZpQQ28aj-suVceGxjZqJ6CRMqEP8Df4KArHommoTaUWgBAXGyxOwQgjmMZPv7T78tScnCOdnT_puIiITUA1D0c"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Crypto Security Watch</div>
+<div class="text-xs text-outline font-medium">@sec_watch_labs</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm font-bold text-outline">—</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-[10px] font-black tracking-wide uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                            Pending Review
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right rtl:text-left">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-white/50 group hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="elegant gastronomic channel logo featuring a gold fork and knife icon on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPlTtfOw8rzGKQA2sU7WtPyBAsEPN7gMgDXztlfOiQX88OdWYmVNMY_nSNBsk6I2BK2Wq4nsIx0IVaE-pRLwUpbEXT-SQIhccHpfvP0AYJAen1tQbUUxOphEg5JPb0uEcO1l9nlIp0pi4DDGswWpkU76EJSn_610Adel3KdAJwKP9dsRZbpSN5USa4pgRAGmyzrx80EFJnVhKjJdgfGQq69XQ8NNWLz1T5OonFxf12mI7DEltMyvuys2tilksnQu6D3mJDeTLZJiI"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">The Night Cook</div>
+<div class="text-xs text-outline font-medium">@night_cook</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm font-bold text-outline">—</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-red-700 rounded-full text-[10px] font-black tracking-wide uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                                            Rejected
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right rtl:text-left">
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 mt-12 bg-slate-50 border-t border-slate-200/50">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 rtl:text-right">
+<div class="col-span-1 md:col-span-1">
+<span class="font-bold text-slate-900 block mb-4">The Digital Curator</span>
+<p class="font-['Inter','Tajawal'] text-xs text-slate-500 leading-relaxed">© 2024 The Digital Curator. Editorial Telegram Directory. A curated space for the best of social content.</p>
+</div>
+<div>
+<h5 class="text-xs font-black uppercase tracking-widest text-slate-900 mb-4">Directory</h5>
+<ul class="space-y-2">
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">About Us</a></li>
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">Submit Channel</a></li>
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">Categories</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-xs font-black uppercase tracking-widest text-slate-900 mb-4">Legal</h5>
+<ul class="space-y-2">
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-xs font-black uppercase tracking-widest text-slate-900 mb-4">Contact</h5>
+<ul class="space-y-2">
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">Advertise</a></li>
+<li><a class="text-xs text-slate-400 hover:text-[#006194] transition-colors" href="#">Contact Support</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
