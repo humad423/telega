@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
+import { signOut } from "@/app/[locale]/auth/actions";
 
 import Link from "next/link";
 
@@ -25,7 +26,7 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
   useEffect(() => {
     setMounted(true);
     
-    // Get initial session
+    // Get initial session and re-fetch on navigation
     supabase.auth.getUser().then((res: any) => {
       const user = res.data?.user ?? null;
       setUser(user);
@@ -33,6 +34,8 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
         supabase.from('profiles').select('is_admin').eq('id', user.id).single().then((profileRes: any) => {
           setIsAdmin(profileRes.data?.is_admin ?? false);
         });
+      } else {
+        setIsAdmin(false);
       }
       setLoading(false);
     });
@@ -63,7 +66,7 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
       subscription.unsubscribe();
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [pathname]);
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
@@ -79,9 +82,8 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
     setUserMenuOpen(false);
-    router.refresh();
+    await signOut(locale);
   };
 
   const prefix = locale === 'en' ? '' : `/${locale}`;

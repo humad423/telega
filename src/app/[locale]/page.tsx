@@ -54,27 +54,29 @@ export default async function Home({ params }: { params: { locale: string } | Pr
 </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {featured.length > 0 ? featured.map((item: any) => (
-        <div key={item.id} className="relative overflow-hidden bg-gradient-to-br from-white dark:from-surface-container to-amber-50/50 dark:to-amber-900/10 p-5 rounded-xl border border-amber-200/50 dark:border-amber-700/30 flex items-center justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div key={item.id} className="relative overflow-hidden bg-gradient-to-br from-white dark:from-surface-container to-amber-50/50 dark:to-amber-900/10 p-5 rounded-xl border border-amber-200/50 dark:border-amber-700/30 flex flex-col sm:flex-row items-start sm:items-center justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 dark:bg-amber-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
-          <div className="flex items-center gap-4 relative z-10 w-full">
-            <div className="w-20 h-20 rounded-full overflow-hidden min-w-20 min-h-20 bg-surface-container flex-shrink-0 ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
-              <img alt={item.title} className="w-full h-full object-cover" src={item.image_url || 'https://via.placeholder.com/150'}/>
-            </div>
-            <div className="flex-grow">
-              <div className="flex items-center gap-2">
-                <h3 className="font-extrabold text-xl md:text-2xl text-slate-900 dark:text-white line-clamp-1">{item.title}</h3>
-                {item.is_verified && <span className="material-symbols-outlined text-sky-500 text-lg" style={{fontVariationSettings: '"FILL" 1'}}>verified</span>}
-                <span className="px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-[10px] font-bold uppercase tracking-widest border border-sky-200 dark:border-sky-700/50">
-                  {item.type === 'channel' ? dict.tagChannel : item.type === 'group' ? dict.tagGroup : dict.tagBot}
-                </span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10 w-full">
+            <div className="flex items-center gap-4 w-full sm:w-auto flex-grow min-w-0">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 bg-surface-container ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
+                <img alt={item.title} className="w-full h-full object-cover" src={item.image_url || 'https://via.placeholder.com/150'}/>
               </div>
-              <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">
-                <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">groups</span> {formatMembers(item.members_count)}</span>
-                {item.categories && <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">category</span> {item.categories.name}</span>}
+              <div className="flex-grow min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-extrabold text-lg md:text-2xl text-slate-900 dark:text-white truncate">{item.title}</h3>
+                  {item.is_verified && <span className="material-symbols-outlined text-sky-500 text-lg shrink-0" style={{fontVariationSettings: '"FILL" 1'}}>verified</span>}
+                  <span className="shrink-0 px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-[10px] font-bold uppercase tracking-widest border border-sky-200 dark:border-sky-700/50">
+                    {item.type === 'channel' ? dict.tagChannel : item.type === 'group' ? dict.tagGroup : dict.tagBot}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">
+                  <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">groups</span> {formatMembers(item.members_count)}</span>
+                  {item.categories && <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">category</span> {item.categories.name}</span>}
+                </div>
+                <p className="text-xs md:text-base text-slate-600 dark:text-slate-400 mt-2 md:mt-2.5 line-clamp-2 pr-4">{item.description}</p>
               </div>
-              <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 mt-2.5 line-clamp-2 pr-4">{item.description}</p>
             </div>
-            <Link className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-sm shadow-md transition-transform active:scale-95 whitespace-nowrap" href={`/${locale}/${item.type}s/${item.slug || item.id}`}>{dict.btnJoin}</Link>
+            <Link className="mt-4 sm:mt-0 w-full sm:w-auto text-center px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-sm shadow-md transition-transform active:scale-95 whitespace-nowrap" href={`/${locale}/${item.type}s/${item.slug || item.id}`}>{dict.btnJoin}</Link>
           </div>
         </div>
       )) : (
@@ -87,18 +89,18 @@ export default async function Home({ params }: { params: { locale: string } | Pr
 {/* 3. Search & Filters */}
 <section className="space-y-6">
 <SearchBar placeholder={dict.searchPlaceholder} locale={locale} />
-        <div className="flex gap-4 justify-center overflow-x-auto no-scrollbar pb-6 pt-3 px-2">
-          <Link href={`/${locale}/category/all`} className="group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-primary text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-primary/30 active:scale-95 whitespace-nowrap border border-transparent">
+        <div className="flex gap-4 justify-start sm:justify-center overflow-x-auto no-scrollbar pb-6 pt-3 px-2">
+          <Link href={`/${locale}/category/all`} className="shrink-0 group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-primary text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-primary/30 active:scale-95 whitespace-nowrap border border-transparent">
             <span className="material-symbols-outlined text-[24px]">grid_view</span>
             {dict.catAll}
           </Link>
           {categories.slice(0, 5).map((cat: any) => (
-            <Link key={cat.id} href={`/${locale}/category/${cat.slug}`} className="group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-white/70 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-200 font-bold text-base transition-all hover:bg-white dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary hover:border-primary/40 dark:hover:border-primary/40 hover:shadow-lg active:scale-95 whitespace-nowrap">
+            <Link key={cat.id} href={`/${locale}/category/${cat.slug}`} className="shrink-0 group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-white/70 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-200 font-bold text-base transition-all hover:bg-white dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary hover:border-primary/40 dark:hover:border-primary/40 hover:shadow-lg active:scale-95 whitespace-nowrap">
               <span className="material-symbols-outlined text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary dark:group-hover:text-primary transition-colors">{cat.icon || 'category'}</span>
               {cat.name}
             </Link>
           ))}
-          <Link href="/categories" className="group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-base transition-all hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-xl active:scale-95 whitespace-nowrap border border-transparent">
+          <Link href="/categories" className="shrink-0 group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-base transition-all hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-xl active:scale-95 whitespace-nowrap border border-transparent">
             {dict.catShowMore}
             <span className="material-symbols-outlined text-[24px] transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">arrow_forward</span>
           </Link>
@@ -118,8 +120,8 @@ export default async function Home({ params }: { params: { locale: string } | Pr
             </div>
 
             {/* Content Row with 5 items + Arrow */}
-            <div className="flex items-center gap-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 flex-grow gap-4">
+            <div className="flex flex-col lg:flex-row items-center gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 w-full flex-grow gap-4">
                 {verified.slice(0, 5).map((item: any) => (
                   <div key={item.id} className="transition-transform duration-300 hover:scale-[1.02]">
                     <DirectoryCard item={mapEntry(item)} locale={locale} dict={dict} isCompact={true} />
@@ -130,7 +132,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
               {/* Animated Arrow Link - Brand Colors */}
               <Link 
                 href={`/${locale}/search?isVerified=true`}
-                className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-90 flex-shrink-0 group"
+                className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-90 shrink-0 group mt-2 lg:mt-0"
               >
                 <span className="material-symbols-outlined font-black text-xl transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">arrow_forward</span>
               </Link>

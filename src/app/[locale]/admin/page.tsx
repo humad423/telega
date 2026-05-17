@@ -174,27 +174,31 @@ function renderReviewQueue(entries: any[], dict: any) {
                 <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{dict.adminReviewList}</h2>
             </header>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                {entries.length === 0 ? <p className="text-slate-500">{dict.adminNoPending}</p> : entries.map(entry => (
-                    <div key={entry.id} className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-outline-variant/10 flex flex-col gap-4 shadow-sm">
-                        <div className="flex gap-4">
-                            <img src={entry.image_url || '/placeholder.png'} className="w-16 h-16 rounded-xl object-cover bg-slate-100" />
-                            <div className="flex-1">
-                                <h4 className="font-bold text-lg">{entry.title}</h4>
-                                <p className="text-xs text-primary font-bold uppercase">{entry.categories?.name}</p>
-                                <p className="text-sm text-slate-500 mt-1 line-clamp-1">{entry.link}</p>
+                {entries.length === 0 ? <p className="text-slate-500">{dict.adminNoPending}</p> : entries.map(entry => {
+                    const approveAction = approveEntry.bind(null, entry.id) as any;
+                    const rejectAction = rejectEntry.bind(null, entry.id) as any;
+                    return (
+                        <div key={entry.id} className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-outline-variant/10 flex flex-col gap-4 shadow-sm">
+                            <div className="flex gap-4">
+                                <img src={entry.image_url || '/placeholder.png'} className="w-16 h-16 rounded-xl object-cover bg-slate-100" />
+                                <div className="flex-1">
+                                    <h4 className="font-bold text-lg">{entry.title}</h4>
+                                    <p className="text-xs text-primary font-bold uppercase">{entry.categories?.name}</p>
+                                    <p className="text-sm text-slate-500 mt-1 line-clamp-1">{entry.link}</p>
+                                </div>
+                            </div>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{entry.description}</p>
+                            <div className="flex gap-3 mt-2">
+                                 <form action={approveAction} className="flex-1">
+                                    <button className="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-primary/20">{dict.adminApprove}</button>
+                                 </form>
+                                 <form action={rejectAction} className="flex-1">
+                                    <button className="w-full bg-slate-100 dark:bg-slate-800 py-3 rounded-xl font-bold text-sm">{dict.adminReject}</button>
+                                 </form> 
                             </div>
                         </div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{entry.description}</p>
-                        <div className="flex gap-3 mt-2">
-                             <form action={async () => { 'use server'; await approveEntry(entry.id); }} className="flex-1">
-                                <button className="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-primary/20">{dict.adminApprove}</button>
-                             </form>
-                             <form action={async () => { 'use server'; await rejectEntry(entry.id); }} className="flex-1">
-                                <button className="w-full bg-slate-100 dark:bg-slate-800 py-3 rounded-xl font-bold text-sm">{dict.adminReject}</button>
-                             </form> 
-                        </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

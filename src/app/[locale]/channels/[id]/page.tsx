@@ -51,17 +51,17 @@ export default async function DetailsPage({
         <section className="relative w-full max-w-[1536px] mx-auto px-6 pt-2 pb-12">
           
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400 mb-8 w-fit px-5 py-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-surface-container-lowest shadow-sm font-['Inter','Tajawal']">
+          <nav className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 sm:mb-8 w-fit px-4 sm:px-5 py-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-surface-container-lowest shadow-sm font-['Inter','Tajawal']">
             <Link href={prefix || '/'} className="hover:text-primary transition-colors">{dict.breadcrumbHome}</Link>
-            <span className="material-symbols-outlined text-xs rtl:rotate-180">chevron_right</span>
+            <span className="material-symbols-outlined text-[10px] sm:text-xs rtl:rotate-180">chevron_right</span>
             <Link href={`${prefix}/channels`} className="hover:text-primary transition-colors">{dict.breadcrumbChannels}</Link>
-            <span className="material-symbols-outlined text-xs rtl:rotate-180">chevron_right</span>
-            <Link href={`${prefix}/category/${item.categorySlug}`} className="hover:text-primary transition-colors">{item.category}</Link>
-            <span className="material-symbols-outlined text-xs rtl:rotate-180">chevron_right</span>
-            <span className="text-slate-800 dark:text-slate-200 font-bold">{item.title}</span>
+            <span className="material-symbols-outlined text-[10px] sm:text-xs rtl:rotate-180">chevron_right</span>
+            <Link href={`${prefix}/category/${item.categorySlug}`} className="hover:text-primary transition-colors truncate max-w-[100px] sm:max-w-none">{item.category}</Link>
+            <span className="material-symbols-outlined text-[10px] sm:text-xs rtl:rotate-180">chevron_right</span>
+            <span className="text-slate-800 dark:text-slate-200 font-bold truncate max-w-[120px] sm:max-w-none">{item.title}</span>
           </nav>
 
-          <div className="bg-gradient-to-br from-primary/5 via-surface-container-lowest to-surface-container rounded-2xl p-8 md:p-14 border border-slate-200/50 dark:border-slate-700/30 flex flex-col lg:flex-row gap-8 lg:gap-14 items-start lg:items-center relative overflow-hidden shadow-xl shadow-slate-200/20 dark:shadow-none">
+          <div className="bg-gradient-to-br from-primary/5 via-surface-container-lowest to-surface-container rounded-3xl p-6 sm:p-8 md:p-14 border border-slate-200/50 dark:border-slate-700/30 flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-14 items-start lg:items-center relative overflow-hidden shadow-xl shadow-slate-200/20 dark:shadow-none">
             
             {/* Soft decorative blur */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
@@ -87,28 +87,28 @@ export default async function DetailsPage({
                 ))}
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-4 font-['Inter','Tajawal'] antialiased">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight flex flex-wrap items-center gap-2 sm:gap-4 font-['Inter','Tajawal'] antialiased">
                 {item.title}
-                {entry.is_verified && <span className="material-symbols-outlined text-sky-500 text-4xl md:text-6xl" style={{fontVariationSettings: '"FILL" 1'}}>verified</span>}
+                {entry.is_verified && <span className="material-symbols-outlined text-sky-500 text-3xl sm:text-4xl md:text-6xl" style={{fontVariationSettings: '"FILL" 1'}}>verified</span>}
               </h1>
               
-              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed font-bold font-['Inter','Tajawal'] opacity-90">
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed font-bold font-['Inter','Tajawal'] opacity-90">
                 {item.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-5 pt-6">
+              <div className="flex items-center gap-3 sm:gap-5 pt-4 sm:pt-6 w-full">
                 {/* Primary Join Button */}
-                <Link href={item.link || '#'} target="_blank" className="relative overflow-hidden group px-10 py-5 bg-primary hover:bg-sky-600 active:bg-sky-700 text-white font-black text-xl rounded-lg shadow-2xl shadow-primary/30 transition-all duration-300 active:scale-95 flex items-center gap-3 font-['Inter','Tajawal']">
-                  <span className="material-symbols-outlined relative z-10 text-2xl" style={{fontVariationSettings: '"FILL" 1'}}>send</span>
-                  <span className="relative z-10 tracking-tight">{dict.detailsJoin}</span>
+                <Link href={item.link || '#'} target="_blank" className="flex-1 sm:flex-none relative overflow-hidden group px-4 py-3 sm:px-10 sm:py-5 justify-center bg-primary hover:bg-sky-600 active:bg-sky-700 text-white font-black text-base sm:text-xl rounded-xl shadow-xl shadow-primary/30 transition-all duration-300 active:scale-95 flex items-center gap-2 sm:gap-3 font-['Inter','Tajawal']">
+                  <span className="material-symbols-outlined relative z-10 text-xl sm:text-2xl" style={{fontVariationSettings: '"FILL" 1'}}>send</span>
+                  <span className="relative z-10 tracking-tight whitespace-nowrap">{dict.detailsJoin}</span>
                 </Link>
                 
                 {/* Secondary Actions */}
                 <button 
                   title="Share"
-                  className="w-16 h-16 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-300 flex items-center justify-center group active:scale-95 shadow-lg shadow-slate-200/10 dark:shadow-none"
+                  className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-300 flex items-center justify-center group active:scale-95 shadow-lg shadow-slate-200/10 dark:shadow-none"
                 >
-                  <span className="material-symbols-outlined group-hover:text-primary transition-colors text-2xl">share</span>
+                  <span className="material-symbols-outlined group-hover:text-primary transition-colors text-xl sm:text-2xl">share</span>
                 </button>
               </div>
             </div>
@@ -117,30 +117,30 @@ export default async function DetailsPage({
         </section>
 
         {/* --- 2. Clean Stats Grid --- */}
-        <section className="relative z-30 max-w-[1536px] mx-auto px-6 mb-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-surface-container-lowest p-8 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1">
-              <span className="material-symbols-outlined text-rose-500 mb-3 text-4xl" style={{fontVariationSettings: '"FILL" 1'}}>groups</span>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter']">{item.members}</div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 font-['Inter','Tajawal']">{dict.cardSubscribers}</span>
+        <section className="relative z-30 max-w-[1536px] mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            <div className="bg-surface-container-lowest p-4 sm:p-8 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1 overflow-hidden">
+              <span className="material-symbols-outlined text-rose-500 mb-2 sm:mb-3 text-3xl sm:text-4xl" style={{fontVariationSettings: '"FILL" 1'}}>groups</span>
+              <div className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter'] truncate w-full px-2">{item.members}</div>
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-400 font-['Inter','Tajawal'] truncate w-full px-1">{dict.cardSubscribers}</span>
             </div>
 
-            <div className="bg-surface-container-lowest p-8 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1">
-              <span className="material-symbols-outlined text-amber-500 mb-3 text-4xl" style={{fontVariationSettings: '"FILL" 1'}}>category</span>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter','Tajawal']">{item.category}</div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 font-['Inter','Tajawal']">{dict.breadcrumbCategory}</span>
+            <div className="bg-surface-container-lowest p-4 sm:p-8 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1 overflow-hidden">
+              <span className="material-symbols-outlined text-amber-500 mb-2 sm:mb-3 text-3xl sm:text-4xl" style={{fontVariationSettings: '"FILL" 1'}}>category</span>
+              <div className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter','Tajawal'] truncate w-full px-2">{item.category}</div>
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-400 font-['Inter','Tajawal'] truncate w-full px-1">{dict.breadcrumbCategory}</span>
             </div>
 
-            <div className="bg-surface-container-lowest p-8 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1">
-              <span className="material-symbols-outlined text-emerald-500 mb-3 text-4xl" style={{fontVariationSettings: '"FILL" 1'}}>translate</span>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter']">EN / AR</div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 font-['Inter','Tajawal']">{locale === 'ar' ? 'اللغة' : 'Language'}</span>
+            <div className="bg-surface-container-lowest p-4 sm:p-8 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1 overflow-hidden">
+              <span className="material-symbols-outlined text-emerald-500 mb-2 sm:mb-3 text-3xl sm:text-4xl" style={{fontVariationSettings: '"FILL" 1'}}>translate</span>
+              <div className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter'] truncate w-full px-2">EN / AR</div>
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-400 font-['Inter','Tajawal'] truncate w-full px-1">{locale === 'ar' ? 'اللغة' : 'Language'}</span>
             </div>
 
-            <div className="bg-surface-container-lowest p-8 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1">
-              <span className="material-symbols-outlined text-purple-500 mb-3 text-4xl">update</span>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter','Tajawal']">{item.lastUpdated}</div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 font-['Inter','Tajawal']">{locale === 'ar' ? 'آخر تحديث' : 'Last Updated'}</span>
+            <div className="bg-surface-container-lowest p-4 sm:p-8 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center transition-all hover:shadow-md hover:-translate-y-1 overflow-hidden">
+              <span className="material-symbols-outlined text-purple-500 mb-2 sm:mb-3 text-3xl sm:text-4xl">update</span>
+              <div className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1 font-['Inter','Tajawal'] truncate w-full px-2">{item.lastUpdated}</div>
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-400 font-['Inter','Tajawal'] truncate w-full px-1">{locale === 'ar' ? 'آخر تحديث' : 'Last Updated'}</span>
             </div>
           </div>
         </section>
