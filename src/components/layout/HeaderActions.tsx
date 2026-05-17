@@ -73,9 +73,31 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
   };
 
   const switchLanguage = (newLocale: string) => {
-    const parts = pathname.split('/');
-    parts[1] = newLocale;
-    const newPath = parts.join('/') || '/';
+    // Check if there is a registered path mapping in window.__localePaths
+    if (typeof window !== 'undefined' && (window as any).__localePaths) {
+      const registeredPaths = (window as any).__localePaths;
+      if (registeredPaths[newLocale]) {
+        setLangOpen(false);
+        router.push(registeredPaths[newLocale]);
+        return;
+      }
+    }
+
+    let newPath = pathname;
+    
+    if (newLocale === 'ar') {
+      // Switch to Arabic: if path doesn't start with /ar, prepend /ar
+      if (!pathname.startsWith('/ar') && pathname !== '/ar') {
+        newPath = `/ar${pathname === '/' ? '' : pathname}`;
+      }
+    } else {
+      // Switch to English: if path starts with /ar, remove the /ar segment
+      if (pathname.startsWith('/ar/')) {
+        newPath = pathname.substring(3);
+      } else if (pathname === '/ar') {
+        newPath = '/';
+      }
+    }
     
     setLangOpen(false);
     router.push(newPath || '/');

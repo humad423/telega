@@ -12,12 +12,21 @@ export default async function StaticPage({
     const dict = await getDictionary(locale);
     const supabase = await createClient();
 
-    const { data: page } = await supabase
+    let { data: page } = await supabase
         .from('pages')
         .select('*')
         .eq('slug', slug)
         .eq('locale', locale)
-        .single();
+        .maybeSingle();
+
+    if (!page) {
+        const { data: fallbackPage } = await supabase
+            .from('pages')
+            .select('*')
+            .eq('slug', slug)
+            .maybeSingle();
+        page = fallbackPage;
+    }
 
     if (!page) notFound();
 

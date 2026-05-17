@@ -54,29 +54,37 @@ export default async function Home({ params }: { params: { locale: string } | Pr
 </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {featured.length > 0 ? featured.map((item: any) => (
-        <div key={item.id} className="relative overflow-hidden bg-gradient-to-br from-white dark:from-surface-container to-amber-50/50 dark:to-amber-900/10 p-5 rounded-xl border border-amber-200/50 dark:border-amber-700/30 flex flex-col sm:flex-row items-start sm:items-center justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div key={item.id} className="relative overflow-hidden bg-gradient-to-br from-white dark:from-surface-container to-amber-50/50 dark:to-amber-900/10 p-4 rounded-xl border border-amber-200/50 dark:border-amber-700/30 flex flex-col sm:flex-row items-start sm:items-center justify-between group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 dark:bg-amber-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10 w-full">
-            <div className="flex items-center gap-4 w-full sm:w-auto flex-grow min-w-0">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 bg-surface-container ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 relative z-10 w-full">
+            <div className="flex items-center gap-3 w-full sm:w-auto flex-grow min-w-0">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shrink-0 bg-surface-container ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
                 <img alt={item.title} className="w-full h-full object-cover" src={item.image_url || 'https://via.placeholder.com/150'}/>
               </div>
-              <div className="flex-grow min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-extrabold text-lg md:text-2xl text-slate-900 dark:text-white truncate">{item.title}</h3>
-                  {item.is_verified && <span className="material-symbols-outlined text-sky-500 text-lg shrink-0" style={{fontVariationSettings: '"FILL" 1'}}>verified</span>}
-                  <span className="shrink-0 px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-[10px] font-bold uppercase tracking-widest border border-sky-200 dark:border-sky-700/50">
+              <div className="flex-grow min-w-0 flex flex-col justify-center">
+                {/* Title Line: Verified icon before title */}
+                <div className="flex items-center gap-1 min-w-0 w-full">
+                  {item.is_verified && <span className="material-symbols-outlined text-sky-500 shrink-0 select-none" style={{fontSize: '18px', fontVariationSettings: '"FILL" 1'}}>verified</span>}
+                  <h3 className="font-extrabold text-base md:text-lg text-slate-900 dark:text-white truncate min-w-0 flex-1">{item.title}</h3>
+                </div>
+                
+                {/* Description Line: Own row, below title */}
+                {item.description && (
+                  <p className="text-xs md:text-xs text-slate-600 dark:text-slate-400 mt-0.5 line-clamp-2 w-full pr-4">{item.description}</p>
+                )}
+
+                {/* Bottom Stats Line: Stats on left, Category Type badge on far right */}
+                <div className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium min-w-0 w-full pr-4">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="flex items-center gap-1 shrink-0"><span className="material-symbols-outlined text-sm">groups</span> {formatMembers(item.members_count)}</span>
+                  </div>
+                  <div className="shrink-0 px-1.5 py-0.5 rounded bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-[8px] font-black uppercase tracking-widest border border-sky-200 dark:border-sky-700/50 select-none">
                     {item.type === 'channel' ? dict.tagChannel : item.type === 'group' ? dict.tagGroup : dict.tagBot}
-                  </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">
-                  <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">groups</span> {formatMembers(item.members_count)}</span>
-                  {item.categories && <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">category</span> {item.categories.name}</span>}
-                </div>
-                <p className="text-xs md:text-base text-slate-600 dark:text-slate-400 mt-2 md:mt-2.5 line-clamp-2 pr-4">{item.description}</p>
               </div>
             </div>
-            <Link className="mt-4 sm:mt-0 w-full sm:w-auto text-center px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-sm shadow-md transition-transform active:scale-95 whitespace-nowrap" href={`/${locale}/${item.type}s/${item.slug || item.id}`}>{dict.btnJoin}</Link>
+            <Link className="mt-3 sm:mt-0 w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-xs shadow-md transition-transform active:scale-95 whitespace-nowrap" href={`/${locale}/${item.type}s/${item.slug || item.id}`}>{dict.btnJoin}</Link>
           </div>
         </div>
       )) : (
@@ -109,7 +117,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
 
       {/* Verified Resources - Unified Compact Block */}
       {verified.length > 0 && (
-        <section className="mx-4 lg:mx-0 bg-white dark:bg-slate-950/40 rounded-2xl border border-slate-100 dark:border-white/5 shadow-sm overflow-hidden mb-12">
+        <section className="bg-white dark:bg-slate-950/40 rounded-2xl border border-slate-100 dark:border-white/5 shadow-sm overflow-hidden mb-12">
           <div className="p-4 pb-5 space-y-4">
             {/* Unified Header */}
             <div className="px-2">

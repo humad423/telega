@@ -43,7 +43,7 @@ export default async function SearchPage({
 
   return (
     <>
-      <main className="pt-24 pb-20 max-w-[1536px] mx-auto px-6 flex flex-col md:flex-row gap-8 min-h-screen font-['Inter','Tajawal']">
+      <main className="pt-16 lg:pt-24 pb-12 lg:pb-20 max-w-[1536px] mx-auto px-4 lg:px-6 flex flex-col lg:flex-row gap-4 lg:gap-8 min-h-screen font-['Inter','Tajawal']">
         {/* Sidebar: Advanced Filters (Client Component) */}
         <aside className="w-full md:w-80 flex-shrink-0">
           <div className="sticky top-24 space-y-6">

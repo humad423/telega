@@ -99,38 +99,73 @@ export default function FilterSidebar({
     { id: 'bot', label: dict.navBots }
   ];
 
+  const locale = pathname.includes('/ar') ? 'ar' : 'en';
+  const isAr = locale === 'ar';
+  const clearLabel = isAr ? 'إعادة تعيين' : 'Clear';
+
   return (
     <aside className="w-full lg:w-80 flex-shrink-0">
-      <div className="sticky top-24 bg-surface-container-lowest border border-outline-variant/15 rounded-xl flex flex-col p-4 lg:p-6 shadow-sm">
-        
-        {/* Mobile Toggle Header */}
+      {/* Mobile Toggle Trigger Header (always visible in layout flow on mobile) */}
+      <div 
+        className="lg:hidden flex items-center justify-between cursor-pointer bg-surface-container-lowest border border-outline-variant/15 rounded-xl p-4 shadow-sm mb-4 active:scale-[0.98] transition-transform duration-100"
+        onClick={() => setIsOpen(true)}
+      >
+        <div className="flex items-center gap-2.5">
+          <span className="material-symbols-outlined text-primary text-xl">
+            filter_alt
+          </span>
+          <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 font-['Inter','Tajawal']">
+            {title}
+          </h2>
+        </div>
+        <div className="flex items-center gap-2 text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20">
+          <span>{isAr ? 'تعديل الفلاتر' : 'Refine'}</span>
+          <span className="material-symbols-outlined text-xs">tune</span>
+        </div>
+      </div>
+
+      {/* Backdrop for mobile drawer */}
+      {isOpen && (
         <div 
-          className="flex items-center justify-between cursor-pointer lg:cursor-default"
-          onClick={() => {
-            // Only toggle on mobile
-            if (window.innerWidth < 1024) {
-              setIsOpen(!isOpen);
-            }
-          }}
-        >
-          <div>
-            <h2 className="text-base lg:text-lg font-bold text-slate-800 dark:text-slate-100 font-['Inter','Tajawal'] flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary lg:hidden text-lg lg:text-xl">
-                {isOpen ? 'filter_list_off' : 'filter_list'}
-              </span>
-              {title}
-            </h2>
-            <p className="text-xs text-slate-500 font-medium tracking-tight uppercase hidden lg:block">{subtitle}</p>
+          className="fixed inset-0 bg-black/60 backdrop-blur-[3px] z-50 lg:hidden transition-opacity duration-300"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Main Sidebar Panel (Static on desktop, Drawer bottom-sheet on mobile) */}
+      <div 
+        className={`
+          fixed lg:sticky inset-x-0 bottom-0 lg:top-24 z-50 lg:z-10
+          bg-surface-container-lowest border-t lg:border border-slate-200/60 dark:border-slate-800 lg:border-outline-variant/15
+          rounded-t-3xl lg:rounded-xl flex flex-col p-5 lg:p-6 shadow-2xl lg:shadow-sm
+          max-h-[85vh] lg:max-h-none overflow-y-auto lg:overflow-visible
+          transition-all duration-350 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+          ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full lg:translate-y-0 opacity-0 lg:opacity-100 pointer-events-none lg:pointer-events-auto'}
+        `}
+      >
+        {/* Mobile Drawer Grabber / Header */}
+        <div className="lg:hidden flex flex-col items-center pb-4 mb-4 border-b border-slate-100 dark:border-slate-800/80">
+          <div className="w-12 h-1 bg-slate-350 dark:bg-slate-700 rounded-full mb-3 shrink-0" />
+          <div className="w-full flex items-center justify-between">
+            <div>
+              <h2 className="text-base font-extrabold text-slate-900 dark:text-white font-['Inter','Tajawal'] flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-xl">tune</span>
+                {title}
+              </h2>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 font-black tracking-widest uppercase mt-0.5">{subtitle}</p>
+            </div>
+            <button 
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-red-500 flex items-center justify-center transition-colors active:scale-90"
+            >
+              <span className="material-symbols-outlined text-lg font-black">close</span>
+            </button>
           </div>
-          <button className="lg:hidden text-slate-500 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-lg flex items-center justify-center">
-            <span className={`material-symbols-outlined transition-transform duration-300 text-lg ${isOpen ? 'rotate-180' : ''}`}>
-              expand_more
-            </span>
-          </button>
         </div>
 
         {/* Filter Content */}
-        <div className={`flex-col gap-4 lg:gap-6 mt-4 lg:mt-6 lg:flex ${isOpen ? 'flex' : 'hidden'}`}>
+        <div className="flex flex-col gap-5 lg:gap-6 mt-1 lg:mt-0">
           {/* Member Count Range */}
           <div className="space-y-1.5 lg:space-y-3">
             <div className="flex items-center justify-between text-primary font-bold">
@@ -142,7 +177,8 @@ export default function FilterSidebar({
                 {formatNumber(maxMembers)}
               </span>
             </div>
-            <div className="flex items-center gap-2 px-1">
+            {/* Force LTR direction on input controls to sync drag and visual endpoints */}
+            <div className="flex items-center gap-2 px-1" dir="ltr">
               <span className="text-[9px] lg:text-[10px] font-black text-slate-400/80 dark:text-slate-500 shrink-0 select-none">0</span>
               <input 
                 className="flex-1 h-1 lg:h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" 
@@ -157,21 +193,20 @@ export default function FilterSidebar({
             </div>
           </div>
 
-
           {/* Type Filter */}
           {showTypeFilter && (
-            <div className="space-y-2 lg:space-y-4 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+            <div className="space-y-2 lg:space-y-4 pt-2.5 border-t border-slate-100 dark:border-slate-800/40">
               <div className="flex items-center gap-2 text-primary font-bold">
                 <span className="material-symbols-outlined text-sm">filter_list</span>
                 <span className="text-xs uppercase tracking-wider">{dict.filterContentType}</span>
               </div>
-              <div className="flex flex-wrap lg:flex-col gap-1.5 lg:gap-0 lg:space-y-2">
+              <div className="flex flex-wrap lg:flex-col gap-2 lg:gap-0 lg:space-y-2">
                 {typeMap.map(t => {
                   const isSelected = selectedTypes.includes(t.id);
                   return (
                     <label 
                       key={t.id} 
-                      className={`flex items-center justify-center lg:justify-start gap-2 cursor-pointer group rounded-lg lg:rounded-none transition-all font-medium py-1.5 px-3 lg:p-0 border lg:border-0 text-xs lg:text-sm select-none ${
+                      className={`flex items-center justify-center lg:justify-start gap-2 cursor-pointer group rounded-lg lg:rounded-none transition-all font-medium py-2 px-3.5 lg:p-0 border lg:border-0 text-xs lg:text-sm select-none ${
                         isSelected 
                           ? 'bg-primary/10 border-primary/30 text-primary font-bold dark:bg-primary/20' 
                           : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200/60 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800'
@@ -192,7 +227,7 @@ export default function FilterSidebar({
           )}
 
           {/* Category Filter */}
-          <div className="space-y-2 lg:space-y-4 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+          <div className="space-y-2 lg:space-y-4 pt-2.5 border-t border-slate-100 dark:border-slate-800/40">
             <div className="flex items-center gap-2 text-primary font-bold">
               <span className="material-symbols-outlined text-sm">category</span>
               <span className="text-xs uppercase tracking-wider">{dict.filterCategories}</span>
@@ -203,7 +238,7 @@ export default function FilterSidebar({
                 return (
                   <label 
                     key={cat.name} 
-                    className={`flex items-center justify-center lg:justify-start gap-2 cursor-pointer group rounded-lg lg:rounded-none transition-all font-medium py-1.5 px-3 lg:p-0 border lg:border-0 text-xs lg:text-sm shrink-0 lg:shrink-1 select-none ${
+                    className={`flex items-center justify-center lg:justify-start gap-2 cursor-pointer group rounded-lg lg:rounded-none transition-all font-medium py-2 px-3.5 lg:p-0 border lg:border-0 text-xs lg:text-sm shrink-0 lg:shrink-1 select-none ${
                       isSelected 
                         ? 'bg-primary/10 border-primary/30 text-primary font-bold dark:bg-primary/20' 
                         : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200/60 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800'
@@ -223,10 +258,13 @@ export default function FilterSidebar({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-row lg:flex-col gap-2 mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+          <div className="flex flex-row lg:flex-col gap-2.5 mt-2 pt-3 border-t border-slate-100 dark:border-slate-800/40">
             <button 
-              onClick={applyFilters}
-              className="flex-1 bg-primary text-white py-2.5 lg:py-4 rounded-lg text-xs lg:text-sm font-black hover:brightness-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 active:scale-[0.96] shadow-lg shadow-primary/20 flex items-center justify-center gap-1.5"
+              onClick={() => {
+                applyFilters();
+                setIsOpen(false); // Close drawer on mobile
+              }}
+              className="flex-1 bg-primary text-white py-3 lg:py-4 rounded-xl text-xs lg:text-sm font-black hover:brightness-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 active:scale-[0.96] shadow-lg shadow-primary/20 flex items-center justify-center gap-1.5"
             >
               <span className="material-symbols-outlined text-sm font-bold animate-pulse">filter_alt</span>
               {dict.filterApply || 'Apply Filters'}
@@ -234,45 +272,48 @@ export default function FilterSidebar({
 
             {(selectedCats.length > 0 || selectedTypes.length > 0 || maxMembers < 50000000) && (
               <button 
-                onClick={resetFilters}
-                className="flex-1 bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 py-2.5 lg:py-3.5 rounded-lg text-xs font-bold hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/10 dark:hover:text-red-400 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 active:scale-[0.96] flex items-center justify-center gap-1.5"
+                onClick={() => {
+                  resetFilters();
+                  setIsOpen(false); // Close drawer on mobile
+                }}
+                className="flex-1 bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 py-3 lg:py-3.5 rounded-xl text-xs font-bold hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/10 dark:hover:text-red-400 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 active:scale-[0.96] flex items-center justify-center gap-1.5"
               >
                 <span className="material-symbols-outlined text-sm">delete_sweep</span>
-                {dict.filterReset || (dict.lang === 'ar' ? 'مسح' : 'Clear')}
+                {dict.filterReset || clearLabel}
               </button>
             )}
           </div>
 
-          {/* Verified Toggle (Subtle & Minimalist below buttons) */}
-          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/50">
+          {/* Verified Toggle (Spaced cleanly with Checkbox next to verification badge) */}
+          <div className="mt-2 pt-3 border-t border-slate-100 dark:border-slate-800/40">
             <button 
               type="button"
               onClick={() => setIsVerified(!isVerified)}
-              className="w-full flex items-center justify-between cursor-pointer select-none group text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+              className="flex items-center gap-3 cursor-pointer select-none group text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors w-full"
             >
-              <div className="flex items-center gap-1.5">
-                <span className={`material-symbols-outlined text-[16px] transition-colors ${
-                  isVerified ? 'text-sky-500' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400'
-                }`}>
-                  verified
-                </span>
-                <span className={`font-medium transition-colors ${
-                  isVerified ? 'text-slate-900 dark:text-slate-100 font-semibold' : ''
-                }`}>
-                  {dict.filterVerified || 'Verified Only'}
-                </span>
-              </div>
-              {/* Clean minimal custom checkbox */}
-              <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${
+              {/* Clean minimal custom checkbox adjacent to label */}
+              <div className={`w-4.5 h-4.5 rounded border flex items-center justify-center shrink-0 transition-all ${
                 isVerified 
                   ? 'bg-sky-500 border-sky-500 text-white' 
                   : 'border-slate-300 dark:border-slate-700 bg-transparent group-hover:border-slate-400 dark:group-hover:border-slate-500'
               }`}>
                 {isVerified && (
-                  <span className="material-symbols-outlined text-[11px] font-black text-white">
+                  <span className="material-symbols-outlined text-[12px] font-black text-white">
                     check
                   </span>
                 )}
+              </div>
+              <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                <span className={`material-symbols-outlined text-[16px] transition-colors ${
+                  isVerified ? 'text-sky-500' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400'
+                }`}>
+                  verified
+                </span>
+                <span className={`font-semibold transition-colors truncate ${
+                  isVerified ? 'text-slate-900 dark:text-slate-100 font-bold' : ''
+                }`}>
+                  {dict.filterVerified || 'Verified Only'}
+                </span>
               </div>
             </button>
           </div>

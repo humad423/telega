@@ -4,18 +4,28 @@ import Link from 'next/link';
 import { getDictionary } from '@/lib/i18n';
 import DirectoryCard from '@/components/ui/DirectoryCard';
 import { formatMembers } from '@/lib/utils';
+import LocalePathRegister from '@/components/layout/LocalePathRegister';
 
 export async function generateMetadata({ params }: { params: { locale: string, slug: string } | Promise<{ locale: string, slug: string }> }): Promise<any> {
     const resolvedParams = await Promise.resolve(params);
     const { locale, slug } = resolvedParams;
     const supabase = await createClient();
 
-    const { data: article } = await supabase
+    let { data: article } = await supabase
         .from('articles')
         .select('title, excerpt, meta_title, meta_description, og_image')
         .eq('slug', slug)
         .eq('locale', locale)
-        .single();
+        .maybeSingle();
+
+    if (!article) {
+        const { data: fallbackArticle } = await supabase
+            .from('articles')
+            .select('title, excerpt, meta_title, meta_description, og_image')
+            .eq('slug', slug)
+            .maybeSingle();
+        article = fallbackArticle;
+    }
 
     if (!article) return {};
 
@@ -40,17 +50,51 @@ export default async function ArticleDetailPage({
     const dict = await getDictionary(locale);
     const supabase = await createClient();
 
-    const { data: article } = await supabase
+    let { data: article } = await supabase
         .from('articles')
         .select('*')
         .eq('slug', slug)
         .eq('locale', locale)
-        .single();
+        .maybeSingle();
+
+    if (!article) {
+        const { data: fallbackArticle } = await supabase
+            .from('articles')
+            .select('*')
+            .eq('slug', slug)
+            .maybeSingle();
+        article = fallbackArticle;
+    }
 
     if (!article) notFound();
 
+    // Find dynamic translation slug mappings
+    const translationPaths: { en?: string; ar?: string } = {};
+    if (locale === 'ar') {
+        translationPaths.ar = `/ar/blog/${slug}`;
+        const enSlugCandidate = slug.endsWith('-ar') ? slug.slice(0, -3) : slug;
+        const { data: trans } = await supabase
+            .from('articles')
+            .select('slug')
+            .eq('locale', 'en')
+            .eq('slug', enSlugCandidate)
+            .maybeSingle();
+        translationPaths.en = trans ? `/blog/${trans.slug}` : `/blog/${slug}`;
+    } else {
+        translationPaths.en = `/blog/${slug}`;
+        const arSlugCandidate = `${slug}-ar`;
+        const { data: trans } = await supabase
+            .from('articles')
+            .select('slug')
+            .eq('locale', 'ar')
+            .eq('slug', arSlugCandidate)
+            .maybeSingle();
+        translationPaths.ar = trans ? `/ar/blog/${trans.slug}` : `/ar/blog/${slug}`;
+    }
+
     return (
-        <main className="pt-24 pb-20 px-6 max-w-[900px] mx-auto min-h-screen">
+        <main className="pt-16 lg:pt-24 pb-12 lg:pb-20 px-4 lg:px-6 max-w-[900px] mx-auto min-h-screen">
+            <LocalePathRegister paths={translationPaths} />
             <header className="mb-12">
                 <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
                     <Link href={`/${locale}/blog`} className="hover:text-primary transition-colors">{dict.blogTitle || 'Blog'}</Link>

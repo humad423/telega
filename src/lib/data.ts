@@ -124,14 +124,29 @@ export async function getEntries({
 }
 
 export async function getEntryBySlug(slug: string, locale: string) {
-  const { data, error } = await supabase
+  // First attempt: match slug and locale
+  let { data, error } = await supabase
     .from('entries')
     .select('*, categories(*)')
     .eq('slug', slug)
     .eq('locale', locale)
-    .single();
+    .maybeSingle();
 
-  if (error) {
+  // Second attempt fallback: match slug regardless of locale
+  if (!data) {
+    const { data: fallbackData } = await supabase
+      .from('entries')
+      .select('*, categories(*)')
+      .eq('slug', slug)
+      .maybeSingle();
+      
+    if (fallbackData) {
+      data = fallbackData;
+      error = null; // Clear error since we found it
+    }
+  }
+
+  if (error && !data) {
     console.error('Error fetching entry:', error);
     return null;
   }

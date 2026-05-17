@@ -67,7 +67,7 @@ export default async function BotsPage({
 
   return (
     <>
-      <main className="pt-24 pb-20 max-w-[1536px] mx-auto px-6 flex flex-col lg:flex-row gap-8 min-h-screen">
+      <main className="pt-16 lg:pt-24 pb-12 lg:pb-20 max-w-[1536px] mx-auto px-4 lg:px-6 flex flex-col lg:flex-row gap-4 lg:gap-8 min-h-screen">
         <FilterSidebar 
           title={dict.filterRefine}
           subtitle={dict.navBots}

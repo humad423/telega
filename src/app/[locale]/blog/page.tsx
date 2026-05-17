@@ -24,7 +24,7 @@ export default async function BlogPage({
 
   return (
     <>
-      <main className="pt-24 pb-20 px-6 max-w-[1536px] mx-auto min-h-screen font-['Inter','Tajawal']">
+      <main className="pt-16 lg:pt-24 pb-12 lg:pb-20 px-4 lg:px-6 max-w-[1536px] mx-auto min-h-screen font-['Inter','Tajawal']">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Main Content Area (Blog Archive) */}
           <div className="lg:col-span-8">
