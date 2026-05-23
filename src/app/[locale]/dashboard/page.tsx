@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { getDictionary } from '@/lib/i18n';
+import Image from 'next/image';
 
 export default async function DashboardPage({ params }: { params: { locale: string } | Promise<{ locale: string }> }) {
   const resolvedParams = await Promise.resolve(params);
@@ -88,8 +89,8 @@ export default async function DashboardPage({ params }: { params: { locale: stri
                 <tr key={entry.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors group">
                   <td className="px-8 py-6">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden shadow-inner">
-                        <img alt={entry.title} className="w-full h-full object-cover" src={entry.image_url || 'https://via.placeholder.com/150'}/>
+                      <div className="relative w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden shadow-inner">
+                        <Image alt={entry.title} className="object-cover" src={entry.image_url || 'https://placehold.co/150'} fill sizes="48px" />
                       </div>
                       <div>
                         <p className="font-bold text-slate-900 dark:text-white">{entry.title}</p>

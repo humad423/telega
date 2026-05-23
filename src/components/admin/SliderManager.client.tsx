@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { upsertSliderItem, deleteSliderItem } from '@/app/[locale]/admin/actions';
 import { createClient } from '@/utils/supabase/client';
+import Image from 'next/image';
 
 const supabase = createClient();
 
@@ -124,7 +125,7 @@ export function SliderManager({ initialSlides, locale }: { initialSlides: any[],
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {initialSlides.map(slide => (
                     <div key={slide.id} className="relative aspect-[16/7] rounded-xl overflow-hidden border border-outline-variant/10 group shadow-lg bg-slate-100 dark:bg-slate-800">
-                        <img src={slide.image_url} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-700" alt={slide.title} />
+                        <Image src={slide.image_url} className="object-cover transition-transform group-hover:scale-105 duration-700" alt={slide.title || 'Slide'} fill sizes="(max-width: 768px) 100vw, 50vw" />
                         {(slide.title || slide.description) ? (
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
                                 <h4 className="text-white font-black text-lg tracking-tight leading-tight">{slide.title}</h4>

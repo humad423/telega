@@ -7,6 +7,8 @@ import { getDictionary } from '@/lib/i18n';
 import { getCategories, getEntries } from '@/lib/data';
 import { formatMembers } from '@/lib/utils';
 
+export const revalidate = 3600;
+
 export default async function GroupsPage({ 
   params,
   searchParams 
@@ -59,7 +61,7 @@ export default async function GroupsPage({
     description: e.description,
     members: formatMembers(e.members_count),
     type: e.type,
-    image: e.image_url || 'https://via.placeholder.com/150',
+    image: e.image_url || 'https://placehold.co/150',
     is_verified: e.is_verified || false
   }));
 

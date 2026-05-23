@@ -18,7 +18,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={locale} dir={dir} className={`${inter.variable} ${tajawal.variable}`} suppressHydrationWarning>
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet" />
       </head>
       <body className="bg-background text-on-surface font-body selection:bg-primary/20 overflow-x-hidden">
         <NextTopLoader color="#f59e0b" height={2} showSpinner={false} initialPosition={0.75} speed={100} crawlSpeed={50} />

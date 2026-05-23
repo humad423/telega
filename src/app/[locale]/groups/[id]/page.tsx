@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getDictionary } from '@/lib/i18n';
 import DirectoryCard from '@/components/ui/DirectoryCard';
 import { getEntryBySlug, getEntries } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import { formatMembers } from '@/lib/utils';
+
+export const revalidate = 3600; // 1 hour
 
 export default async function DetailsPage({ 
   params 
@@ -40,7 +43,7 @@ export default async function DetailsPage({
     language: entry.language?.toUpperCase() || (locale === 'ar' ? 'عربي' : 'EN'),
     lastUpdated: new Date(entry.created_at).toLocaleDateString(locale === 'ar' ? 'ar-EG' : 'en-US', { month: 'short', year: '2-digit' }),
     tags: [entry.categories?.name, entry.is_verified ? 'Verified' : null].filter(Boolean),
-    image: entry.image_url || 'https://via.placeholder.com/300',
+    image: entry.image_url || 'https://placehold.co/300',
     link: entry.link
   };
 
@@ -49,7 +52,7 @@ export default async function DetailsPage({
       <main className="min-h-screen pt-4 lg:pt-12">
         
         {/* --- 1. Hero Section --- */}
-        <section className="relative w-full max-w-[1536px] mx-auto px-1.5 sm:px-6 pt-2 pb-8 sm:pb-12">
+        <section className="relative w-full max-w-[1536px] mx-auto px-1.5 sm:px-6 pt-2 pb-3 sm:pb-6">
           
           <nav className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 sm:mb-8 w-fit px-4 sm:px-5 py-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-surface-container-lowest shadow-sm font-['Inter','Tajawal']">
             <Link href={prefix || '/'} className="hover:text-primary transition-colors">{dict.breadcrumbHome}</Link>
@@ -71,11 +74,13 @@ export default async function DetailsPage({
               
               {/* Mobile Avatar + Title (flex row on mobile, hidden on md) */}
               <div className="flex md:hidden items-center gap-3 w-full">
-                <div className="w-16 h-16 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-md p-1 ring-1 ring-slate-200 dark:ring-slate-700 shrink-0">
-                  <img 
-                    className="w-full h-full object-cover rounded-lg" 
+                <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-md p-1 ring-1 ring-slate-200 dark:ring-slate-700 shrink-0">
+                  <Image 
+                    className="object-cover rounded-lg" 
                     src={item.image} 
                     alt={item.title} 
+                    fill
+                    sizes="64px"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -95,11 +100,14 @@ export default async function DetailsPage({
 
               {/* Desktop Avatar (hidden on mobile, block on md) */}
               <div className="hidden md:flex relative shrink-0 justify-center">
-                <div className="w-44 md:w-56 h-44 md:h-56 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-2xl p-2.5 ring-1 ring-slate-200 dark:ring-slate-700 group transition-transform duration-500 hover:scale-105">
-                  <img 
-                    className="w-full h-full object-cover rounded-lg" 
+                <div className="relative w-44 md:w-56 h-44 md:h-56 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-2xl p-2.5 ring-1 ring-slate-200 dark:ring-slate-700 group transition-transform duration-500 hover:scale-105">
+                  <Image 
+                    className="object-cover rounded-lg" 
                     src={item.image} 
                     alt={item.title} 
+                    fill
+                    sizes="(max-width: 768px) 176px, 224px"
+                    priority
                   />
                 </div>
               </div>
@@ -222,7 +230,7 @@ export default async function DetailsPage({
                       members: formatMembers(e.members_count),
                       description: e.description,
                       type: e.type,
-                      image: e.image_url || 'https://via.placeholder.com/200'
+                      image: e.image_url || 'https://placehold.co/200'
                     }}
                  />
                ))}

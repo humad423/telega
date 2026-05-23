@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getDictionary } from '@/lib/i18n';
 import { HeroSlider } from '@/components/home/HeroSlider';
 import SearchBar from '@/components/ui/SearchBar';
 import { getEntries, getCategories, getSliderItems } from '@/lib/data';
 import DirectoryCard from '@/components/ui/DirectoryCard';
 import { formatMembers } from '@/lib/utils';
+
+export const revalidate = 3600; // 1 hour
 
 export default async function Home({ params }: { params: { locale: string } | Promise<{ locale: string }> }) {
   const resolvedParams = await Promise.resolve(params);
@@ -33,7 +36,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
     description: e.description,
     members: formatMembers(e.members_count),
     type: e.type,
-    image: e.image_url || 'https://via.placeholder.com/150',
+    image: e.image_url || 'https://placehold.co/150',
     is_verified: e.is_verified || false
   });
 
@@ -58,8 +61,8 @@ export default async function Home({ params }: { params: { locale: string } | Pr
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 dark:bg-amber-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 relative z-10 w-full">
             <div className="flex items-center gap-3 w-full sm:w-auto flex-grow min-w-0">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shrink-0 bg-surface-container ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
-                <img alt={item.title} className="w-full h-full object-cover" src={item.image_url || 'https://via.placeholder.com/150'}/>
+              <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shrink-0 bg-surface-container ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
+                <Image alt={item.title} className="object-cover" src={item.image_url || 'https://placehold.co/150'} fill sizes="64px" />
               </div>
               <div className="flex-grow min-w-0 flex flex-col justify-center">
                 {/* Title Line: Verified icon before title */}

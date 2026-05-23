@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Slide = {
   id: number;
@@ -39,11 +40,14 @@ export function HeroSlider({
     <section className="relative w-full h-[250px] sm:h-[320px] md:h-[400px] lg:h-[450px] overflow-hidden group cursor-pointer border-b border-slate-200/60 dark:border-slate-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
       {/* Background Image transitions */}
       {slides.map((s, index) => (
-        <img 
+        <Image 
           key={s.id}
           alt={s.title} 
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`} 
+          className={`object-cover transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`} 
           src={s.image_url}
+          fill
+          priority={index === 0}
+          sizes="100vw"
         />
       ))}
 

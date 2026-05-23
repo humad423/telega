@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface DirectoryItem {
   id: string;
@@ -53,7 +54,7 @@ export default function DirectoryCard({
       >
         {/* Avatar */}
         <div className="w-12 h-12 rounded-xl overflow-hidden shadow-inner ring-1 ring-slate-100 dark:ring-slate-800 shrink-0 bg-surface-container relative">
-          <img alt={item.type} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src={item.image}/>
+          <Image alt={item.type} className="object-cover transition-transform duration-500 group-hover:scale-110" src={item.image || 'https://placehold.co/150'} fill sizes="48px" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
         </div>
 
@@ -115,7 +116,7 @@ export default function DirectoryCard({
         {/* Upper row on mobile (Avatar + Title) */}
         <div className="flex items-center gap-3 sm:gap-4 min-w-0">
           <div className="w-12 h-12 sm:w-16 sm:h-16 min-w-12 min-h-12 sm:min-w-16 sm:min-h-16 rounded-xl overflow-hidden shadow-inner ring-1 ring-slate-100 dark:ring-slate-800 shrink-0 bg-surface-container relative">
-            <img alt={item.type} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src={item.image}/>
+            <Image alt={item.type} className="object-cover transition-transform duration-500 group-hover:scale-110" src={item.image || 'https://placehold.co/150'} fill sizes="(max-width: 640px) 48px, 64px" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
           

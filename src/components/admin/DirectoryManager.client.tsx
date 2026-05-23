@@ -9,8 +9,9 @@ import {
     toggleVerified, 
     upsertEntry,
     getTelegramMetadata
-} from '@/app/[locale]/admin/actions';
+import { getTelegramMetadata } from '@/app/[locale]/admin/actions';
 import { createClient } from '@/utils/supabase/client';
+import Image from 'next/image';
 
 const supabase = createClient();
 
@@ -319,10 +320,12 @@ export function DirectoryManager({
                                     <td className="p-5">
                                         <div className="flex items-center gap-4">
                                             <div className="relative w-12 h-12 rounded-lg overflow-hidden shadow-md flex-shrink-0">
-                                                <img 
+                                                <Image 
                                                     src={entry.image_url || '/placeholder.png'} 
-                                                    className="w-full h-full object-cover" 
+                                                    className="object-cover" 
                                                     alt={entry.title}
+                                                    fill
+                                                    sizes="48px"
                                                 />
                                             </div>
                                             <div>

@@ -5,6 +5,7 @@ import {
     deleteArticle 
 } from '@/app/[locale]/admin/actions';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function ArticleManager({ 
     initialArticles, 
@@ -76,9 +77,9 @@ export function ArticleManager({
                             <tr key={article.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors group">
                                 <td className="p-5">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0 overflow-hidden shadow-sm">
+                                        <div className="relative w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0 overflow-hidden shadow-sm">
                                             {article.image_url ? (
-                                                <img src={article.image_url} className="w-full h-full object-cover" />
+                                                <Image src={article.image_url} className="object-cover" alt="Article image" fill sizes="48px" />
                                             ) : (
                                                 <div className="w-full h-full flex items-center justify-center text-slate-300">
                                                     <span className="material-symbols-outlined">image</span>

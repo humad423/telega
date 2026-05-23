@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { getTelegramMetadata } from '@/app/[locale]/admin/actions';
 import { submitEntry } from '@/app/[locale]/dashboard/submit/actions';
 
@@ -129,8 +130,8 @@ export default function SubmitForm({ categories, locale, dict }: SubmitFormProps
                 </div>
 
                 <div className="flex items-center gap-6 mb-8">
-                    <div className="w-24 h-24 rounded-xl overflow-hidden shadow-2xl ring-4 ring-white dark:ring-slate-700">
-                        <img src={fetchedData.image_url} className="w-full h-full object-cover" alt={fetchedData.title} />
+                    <div className="w-24 h-24 rounded-xl overflow-hidden shadow-2xl ring-4 ring-white dark:ring-slate-700 relative">
+                        <Image src={fetchedData.image_url} className="object-cover" alt={fetchedData.title} fill sizes="96px" />
                     </div>
                     <div>
                         <h3 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">

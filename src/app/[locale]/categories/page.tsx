@@ -20,6 +20,8 @@ const predefinedCategories = [
   { id: 'science', icon: 'science', en: 'Science', ar: 'علوم' },
 ];
 
+export const revalidate = 3600;
+
 export default async function CategoriesPage({ params }: { params: { locale: string } | Promise<{ locale: string }> }) {
   const resolvedParams = await Promise.resolve(params);
   const locale = resolvedParams.locale;

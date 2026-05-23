@@ -103,7 +103,7 @@ export default async function SearchPage({
                     description: item.description,
                     members: formatMembers(item.members_count),
                     type: item.type,
-                    image: item.image_url || 'https://via.placeholder.com/150',
+                    image: item.image_url || 'https://placehold.co/150',
                     is_verified: item.is_verified || false
                   }} 
                   locale={locale} 

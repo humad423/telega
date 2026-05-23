@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { approveEntry, rejectEntry, deleteEntry, toggleFeatured, toggleVerified, toggleAdmin, upsertSliderItem, deleteSliderItem, upsertEntry, upsertCategory, deleteCategory, toggleBan, updateProfile } from './actions';
 import Link from 'next/link';
+import Image from 'next/image';
 import { SliderManager } from '@/components/admin/SliderManager.client';
 import { DirectoryManager } from '@/components/admin/DirectoryManager.client';
 import { UserManager } from '@/components/admin/UserManager.client';
@@ -180,7 +181,7 @@ function renderReviewQueue(entries: any[], dict: any) {
                     return (
                         <div key={entry.id} className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-outline-variant/10 flex flex-col gap-4 shadow-sm">
                             <div className="flex gap-4">
-                                <img src={entry.image_url || '/placeholder.png'} className="w-16 h-16 rounded-xl object-cover bg-slate-100" />
+                                <Image src={entry.image_url || '/placeholder.png'} className="rounded-xl object-cover bg-slate-100" width={64} height={64} alt={entry.title} />
                                 <div className="flex-1">
                                     <h4 className="font-bold text-lg">{entry.title}</h4>
                                     <p className="text-xs text-primary font-bold uppercase">{entry.categories?.name}</p>
