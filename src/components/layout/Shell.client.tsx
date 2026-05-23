@@ -1,6 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { HeaderNav } from './HeaderNav';
 import { HeaderActions } from './HeaderActions';
@@ -17,11 +18,44 @@ export function SiteShell({
     dict: any 
 }) {
     const pathname = usePathname();
+    const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
     const supabase = createClient();
+    const { theme, setTheme, resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    const toggleTheme = () => {
+        setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    };
+
+    const switchLanguage = (newLocale: string) => {
+        if (typeof window !== 'undefined' && (window as any).__localePaths) {
+            const registeredPaths = (window as any).__localePaths;
+            if (registeredPaths[newLocale]) {
+                setIsMobileMenuOpen(false);
+                router.push(registeredPaths[newLocale]);
+                return;
+            }
+        }
+        let newPath = pathname;
+        if (newLocale === 'ar') {
+            if (!pathname.startsWith('/ar') && pathname !== '/ar') {
+                newPath = `/ar${pathname === '/' ? '' : pathname}`;
+            }
+        } else {
+            if (pathname.startsWith('/ar/')) {
+                newPath = pathname.substring(3);
+            } else if (pathname === '/ar') {
+                newPath = '/';
+            }
+        }
+        setIsMobileMenuOpen(false);
+        router.push(newPath || '/');
+    };
 
     useEffect(() => {
+        setMounted(true);
         supabase.auth.getUser().then((res: any) => {
             setUser(res.data?.user ?? null);
         });
@@ -92,7 +126,7 @@ export function SiteShell({
     return (
         <>
             <header className="sticky top-0 z-50 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
-                <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 max-w-[1536px] mx-auto w-full font-['Inter','Tajawal'] antialiased tracking-tight">
+                <div className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-4 max-w-[1536px] mx-auto w-full font-['Inter','Tajawal'] antialiased tracking-tight">
                     <div className="flex items-center gap-4 sm:gap-8">
                         <Link className="text-xl sm:text-2xl font-bold tracking-tighter text-sky-700 dark:text-sky-400 shrink-0" href={locale === 'en' ? '/' : `/${locale}`}>
                             TeleCurator
@@ -106,7 +140,7 @@ export function SiteShell({
                         {/* Mobile Menu Toggle Button */}
                         <button 
                             onClick={() => setIsMobileMenuOpen(true)}
-                            className="md:hidden p-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg flex items-center justify-center transition-colors active:scale-95 ml-1 rtl:ml-0 rtl:mr-1"
+                            className="md:hidden p-1.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg flex items-center justify-center transition-colors active:scale-95 ml-1 rtl:ml-0 rtl:mr-1"
                             aria-label="Open menu"
                         >
                             <span className="material-symbols-outlined text-[24px]">menu</span>
@@ -125,9 +159,9 @@ export function SiteShell({
                     />
                     
                     {/* Drawer Panel */}
-                    <div className="fixed top-0 bottom-0 ltr:left-0 rtl:right-0 w-80 max-w-[85vw] bg-white dark:bg-slate-950 p-6 shadow-2xl flex flex-col justify-between transition-transform duration-300 ease-out transform translate-x-0 animate-in slide-in-from-left rtl:slide-in-from-right font-['Inter','Tajawal'] border-r ltr:border-slate-200 rtl:border-l rtl:border-slate-800 dark:border-slate-800">
+                    <div className="fixed top-0 bottom-0 ltr:right-0 rtl:left-0 w-80 max-w-[85vw] bg-white dark:bg-slate-950 p-6 shadow-2xl flex flex-col justify-start overflow-y-auto transition-transform duration-300 ease-out transform translate-x-0 animate-in slide-in-from-right rtl:slide-in-from-left font-['Inter','Tajawal'] border-l ltr:border-slate-200 rtl:border-r rtl:border-slate-800 dark:border-slate-800">
                         {/* Top Section */}
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-6 pb-6">
                             {/* Drawer Header */}
                             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-900">
                                 <Link 
@@ -171,6 +205,27 @@ export function SiteShell({
 
                         {/* Bottom Actions inside Drawer */}
                         <div className="flex flex-col gap-4 pt-6 border-t border-slate-100 dark:border-slate-900">
+                            {/* Drawer Settings (Theme & Lang) */}
+                            <div className="flex items-center gap-3">
+                                <button 
+                                    onClick={toggleTheme}
+                                    className="flex-1 py-3 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg flex flex-col items-center justify-center gap-1 font-bold text-xs transition-colors border border-slate-200 dark:border-slate-800"
+                                >
+                                    <span className="material-symbols-outlined text-xl">
+                                        {mounted && resolvedTheme === 'dark' ? 'light_mode' : 'dark_mode'}
+                                    </span>
+                                    {mounted && resolvedTheme === 'dark' ? (locale === 'ar' ? 'الوضع النهاري' : 'Light Mode') : (locale === 'ar' ? 'الوضع الليلي' : 'Dark Mode')}
+                                </button>
+
+                                <button 
+                                    onClick={() => switchLanguage(locale === 'en' ? 'ar' : 'en')}
+                                    className="flex-1 py-3 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg flex flex-col items-center justify-center gap-1 font-bold text-xs transition-colors border border-slate-200 dark:border-slate-800"
+                                >
+                                    <span className="material-symbols-outlined text-xl">language</span>
+                                    {locale === 'en' ? 'العربية' : 'English'}
+                                </button>
+                            </div>
+
                             {/* "Add to TeleCurator" CTA button */}
                             <Link 
                                 href={user ? `${prefix}/dashboard` : `${prefix}/login`} 
@@ -208,7 +263,7 @@ export function SiteShell({
                         <span className="font-bold text-lg text-slate-900 dark:text-white">TeleCurator</span>
                         <p className="text-sm font-['Inter','Tajawal'] text-slate-500 dark:text-slate-400">© 2024 TeleCurator. {dict.footerRights}</p>
                     </div>
-                    <nav className="flex gap-8">
+                    <nav className="flex flex-wrap justify-center gap-4 sm:gap-8">
                         <Link className="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-bold uppercase tracking-widest font-['Inter','Tajawal']" href="/about">{dict.footerAbout}</Link>
                         <Link className="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-bold uppercase tracking-widest font-['Inter','Tajawal']" href="/privacy">{dict.footerPrivacy}</Link>
                         <Link className="text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors text-sm font-bold uppercase tracking-widest font-['Inter','Tajawal']" href="/terms">{dict.footerTerms}</Link>

@@ -111,8 +111,17 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
   const prefix = locale === 'en' ? '' : `/${locale}`;
 
   return (
-    <div className="flex items-center gap-1.5 sm:gap-3">
+    <div className="flex items-center gap-1 sm:gap-3">
       
+      {/* Search Button (Fixed in Header) */}
+      <Link 
+        href={`${prefix}/search`}
+        className="p-1.5 sm:p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 rounded-lg flex items-center justify-center group text-slate-700 dark:text-slate-300"
+        aria-label="Search"
+      >
+        <span className="material-symbols-outlined text-[20px] sm:text-[24px]">search</span>
+      </Link>
+
       {/* 1. Add Group Link */}
       <Link 
         href={user ? `${prefix}/dashboard` : `${prefix}/login`} 
@@ -125,7 +134,7 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
       {!user ? (
         <Link 
           href={`${prefix}/login`}
-          className="p-2 sm:px-5 sm:py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm font-bold rounded-md transition-all active:scale-95 flex items-center gap-2"
+          className="p-1.5 sm:px-5 sm:py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm font-bold rounded-md transition-all active:scale-95 flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-[20px] sm:hidden">login</span>
           <span className="hidden sm:inline">{dict.navSignIn}</span>
@@ -181,11 +190,11 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
         </div>
       )}
       
-      {/* 3. Language Selector */}
-      <div className="relative" ref={langRef}>
+      {/* 3. Language Selector (Hidden on mobile) */}
+      <div className="relative hidden md:block" ref={langRef}>
         <button 
           onClick={() => setLangOpen(!langOpen)}
-          className={`p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 rounded-lg flex items-center justify-center ${langOpen ? 'bg-slate-100 dark:bg-slate-800 shadow-inner' : ''}`}
+          className={`p-1.5 sm:p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 rounded-lg flex items-center justify-center ${langOpen ? 'bg-slate-100 dark:bg-slate-800 shadow-inner' : ''}`}
           aria-label="Toggle language"
         >
           <span className="material-symbols-outlined text-slate-700 dark:text-slate-300">language</span>
@@ -209,10 +218,10 @@ export function HeaderActions({ dict, locale }: { dict: any, locale: string }) {
         )}
       </div>
 
-      {/* 4. Theme Toggle */}
+      {/* 4. Theme Toggle (Hidden on mobile) */}
       <button 
         onClick={toggleTheme}
-        className="p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 rounded-lg flex items-center justify-center group"
+        className="hidden md:flex p-1.5 sm:p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 rounded-lg items-center justify-center group"
         aria-label="Toggle dark mode"
       >
         {mounted && resolvedTheme === "dark" ? (

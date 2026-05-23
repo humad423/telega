@@ -31,7 +31,7 @@ export default async function StaticPage({
     if (!page) notFound();
 
     return (
-        <main className="pt-32 pb-20 px-6 max-w-[800px] mx-auto min-h-screen">
+        <main className="pt-8 lg:pt-32 pb-20 px-1.5 sm:px-6 max-w-[800px] mx-auto min-h-screen">
             <header className="mb-12 border-b border-outline-variant/10 pb-8">
                 <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white uppercase mb-4">
                     {page.title}

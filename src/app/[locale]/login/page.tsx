@@ -14,7 +14,7 @@ export default async function LoginPage({ params }: { params: { locale: string }
   const dict = await getDictionary(locale);
 
   return (
-    <main className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-slate-50 dark:bg-[#0f141a]">
+    <main className="relative overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-slate-50 dark:bg-[#0f141a]">
       {/* Background Ornaments */}
       <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 rounded-full bg-sky-400/10 dark:bg-sky-500/5 blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 -ml-32 -mb-32 w-96 h-96 rounded-full bg-indigo-500/10 dark:bg-indigo-600/5 blur-3xl pointer-events-none"></div>

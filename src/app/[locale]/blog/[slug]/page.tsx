@@ -93,7 +93,7 @@ export default async function ArticleDetailPage({
     }
 
     return (
-        <main className="pt-16 lg:pt-24 pb-12 lg:pb-20 px-4 lg:px-6 max-w-[900px] mx-auto min-h-screen">
+        <main className="pt-4 lg:pt-24 pb-12 lg:pb-20 px-1.5 lg:px-6 max-w-[900px] mx-auto min-h-screen">
             <LocalePathRegister paths={translationPaths} />
             <header className="mb-12">
                 <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">

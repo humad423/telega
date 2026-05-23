@@ -1,7 +1,9 @@
+import React from 'react';
 import { Inter, Tajawal } from 'next/font/google';
 import { ThemeProvider } from '@/components/layout/Providers';
 import { getDictionary } from '@/lib/i18n';
 import { SiteShell } from '@/components/layout/Shell.client';
+import NextTopLoader from 'nextjs-toploader';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -18,8 +20,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
       </head>
-      <body className="bg-background text-on-surface font-body selection:bg-primary/20">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className="bg-background text-on-surface font-body selection:bg-primary/20 overflow-x-hidden">
+        <NextTopLoader color="#f59e0b" height={2} showSpinner={false} initialPosition={0.75} speed={100} crawlSpeed={50} />
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <SiteShell locale={locale} dict={dict}>
             {children}
           </SiteShell>

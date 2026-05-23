@@ -40,7 +40,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
   return (
     <>
       <HeroSlider locale={locale} dict={dict} slides={slides} />
-      <main className="max-w-[1536px] mx-auto px-6 pt-12 pb-8 space-y-16">
+      <main className="max-w-[1536px] mx-auto px-6 pt-4 lg:pt-12 pb-8 space-y-6 lg:space-y-16">
         {/* 2. Featured Showcase */}
         <section className="space-y-8">
 <div className="flex items-end justify-between">
@@ -97,20 +97,20 @@ export default async function Home({ params }: { params: { locale: string } | Pr
 {/* 3. Search & Filters */}
 <section className="space-y-6">
 <SearchBar placeholder={dict.searchPlaceholder} locale={locale} />
-        <div className="flex gap-4 justify-start sm:justify-center overflow-x-auto no-scrollbar pb-6 pt-3 px-2">
-          <Link href={`/${locale}/category/all`} className="shrink-0 group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-primary text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-primary/30 active:scale-95 whitespace-nowrap border border-transparent">
-            <span className="material-symbols-outlined text-[24px]">grid_view</span>
+        <div className="flex gap-2 sm:gap-4 justify-start sm:justify-center overflow-x-auto no-scrollbar pb-6 pt-3 px-1 sm:px-2">
+          <Link href={`/${locale}/category/all`} className="shrink-0 group flex items-center gap-2 sm:gap-3 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg bg-primary text-white font-bold text-xs sm:text-base transition-all hover:shadow-xl hover:shadow-primary/30 active:scale-95 whitespace-nowrap border border-transparent">
+            <span className="material-symbols-outlined text-[18px] sm:text-[24px]">grid_view</span>
             {dict.catAll}
           </Link>
           {categories.slice(0, 5).map((cat: any) => (
-            <Link key={cat.id} href={`/${locale}/category/${cat.slug}`} className="shrink-0 group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-white/70 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-200 font-bold text-base transition-all hover:bg-white dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary hover:border-primary/40 dark:hover:border-primary/40 hover:shadow-lg active:scale-95 whitespace-nowrap">
-              <span className="material-symbols-outlined text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary dark:group-hover:text-primary transition-colors">{cat.icon || 'category'}</span>
+            <Link key={cat.id} href={`/${locale}/category/${cat.slug}`} className="shrink-0 group flex items-center gap-2 sm:gap-3 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg bg-white/70 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-base transition-all hover:bg-white dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary hover:border-primary/40 dark:hover:border-primary/40 hover:shadow-lg active:scale-95 whitespace-nowrap">
+              <span className="material-symbols-outlined text-[18px] sm:text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary dark:group-hover:text-primary transition-colors">{cat.icon || 'category'}</span>
               {cat.name}
             </Link>
           ))}
-          <Link href="/categories" className="shrink-0 group flex items-center gap-3 px-8 py-3.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-base transition-all hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-xl active:scale-95 whitespace-nowrap border border-transparent">
+          <Link href="/categories" className="shrink-0 group flex items-center gap-2 sm:gap-3 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs sm:text-base transition-all hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-xl active:scale-95 whitespace-nowrap border border-transparent">
             {dict.catShowMore}
-            <span className="material-symbols-outlined text-[24px] transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">arrow_forward</span>
+            <span className="material-symbols-outlined text-[18px] sm:text-[24px] transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">arrow_forward</span>
           </Link>
         </div>
 </section>
@@ -142,7 +142,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
                 href={`/${locale}/search?isVerified=true`}
                 className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-90 shrink-0 group mt-2 lg:mt-0"
               >
-                <span className="material-symbols-outlined font-black text-xl transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">arrow_forward</span>
+                <span className="material-symbols-outlined font-black text-xl transition-transform group-hover:translate-y-1 lg:group-hover:translate-x-1 rtl:lg:group-hover:-translate-x-1 rotate-90 lg:rotate-0">arrow_forward</span>
               </Link>
             </div>
           </div>

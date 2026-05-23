@@ -96,7 +96,7 @@ export default async function CategorySlugPage({
 
   return (
     <>
-      <main className="pt-16 lg:pt-24 pb-12 lg:pb-20 max-w-[1536px] mx-auto px-4 lg:px-6 flex flex-col lg:flex-row gap-4 lg:gap-8 min-h-screen">
+      <main className="pt-4 lg:pt-24 pb-12 lg:pb-20 max-w-[1536px] mx-auto px-1.5 lg:px-6 flex flex-col lg:flex-row gap-4 lg:gap-8 min-h-screen">
         <FilterSidebar 
           title={dict.filterRefine}
           subtitle={categoryName}
