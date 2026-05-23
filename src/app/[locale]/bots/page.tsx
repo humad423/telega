@@ -61,7 +61,7 @@ export default async function BotsPage({
     description: e.description,
     members: formatMembers(e.members_count),
     type: e.type,
-    image: e.image_url || 'https://placehold.co/150',
+    image: e.image_url || 'https://placehold.co//png',
     is_verified: e.is_verified || false
   }));
 

@@ -36,7 +36,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
     description: e.description,
     members: formatMembers(e.members_count),
     type: e.type,
-    image: e.image_url || 'https://placehold.co/150',
+    image: e.image_url || 'https://placehold.co//png',
     is_verified: e.is_verified || false
   });
 
@@ -62,7 +62,7 @@ export default async function Home({ params }: { params: { locale: string } | Pr
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 relative z-10 w-full">
             <div className="flex items-center gap-3 w-full sm:w-auto flex-grow min-w-0">
               <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shrink-0 bg-surface-container ring-2 ring-amber-400/30 ring-offset-2 ring-offset-white dark:ring-offset-surface-container">
-                <Image alt={item.title} className="object-cover" src={item.image_url || 'https://placehold.co/150'} fill sizes="64px" />
+                <Image alt={item.title} className="object-cover" src={item.image_url || 'https://placehold.co//png'} fill sizes="64px" />
               </div>
               <div className="flex-grow min-w-0 flex flex-col justify-center">
                 {/* Title Line: Verified icon before title */}

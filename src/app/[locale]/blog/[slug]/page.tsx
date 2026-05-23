@@ -46,7 +46,6 @@ export async function generateMetadata({ params }: { params: { locale: string, s
             images: article.og_image ? [article.og_image] : [],
         }
     };
-    };
 }
 export const revalidate = 3600; // Revalidate every hour
 
@@ -307,7 +306,7 @@ export default async function ArticleDetailPage({
                                 <Link key={item.id} href={`/${locale}/blog/${item.slug}`} className="block group">
                                     <article className="bg-slate-50 dark:bg-slate-900 rounded-3xl p-3 border border-slate-200/50 dark:border-slate-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full flex flex-col group-hover:border-primary/20">
                                         <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5">
-                                            <Image src={item.image_url || 'https://placehold.co/400x225'} className="object-cover group-hover:scale-105 transition-transform duration-700" alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" />
+                                            <Image src={item.image_url || 'https://placehold.co//png'} className="object-cover group-hover:scale-105 transition-transform duration-700" alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" />
                                         </div>
                                         <div className="px-3 pb-4 flex flex-col flex-1">
                                             <span className="text-[10px] font-black uppercase tracking-widest text-primary mb-3">

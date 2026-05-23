@@ -114,7 +114,7 @@ export default async function BlogPage({
                 <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all duration-500 z-10"></div>
                 <Image 
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
-                  src={featured.image_url || 'https://placehold.co/800x400'} 
+                  src={featured.image_url || 'https://placehold.co//png'} 
                   alt={featured.title}
                   fill
                   priority
@@ -159,7 +159,7 @@ export default async function BlogPage({
                 <Link key={article.id} href={`/${locale}/blog/${article.slug}`} className="block group">
                 <article className="bg-white dark:bg-slate-900 rounded-3xl p-3 shadow-md shadow-slate-200/20 dark:shadow-none hover:shadow-xl transition-all duration-500 border border-slate-200/60 dark:border-slate-800 h-full flex flex-col group-hover:-translate-y-1 group-hover:border-primary/20">
                     <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-5 relative">
-                    <Image className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src={article.image_url || 'https://placehold.co/400x225'} alt={article.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                    <Image className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src={article.image_url || 'https://placehold.co//png'} alt={article.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                     <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-slate-900 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-sm">
                         {locale === 'ar' ? 'مقالات' : 'Article'}
                     </div>

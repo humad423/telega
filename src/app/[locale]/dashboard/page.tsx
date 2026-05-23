@@ -90,7 +90,7 @@ export default async function DashboardPage({ params }: { params: { locale: stri
                   <td className="px-8 py-6">
                     <div className="flex items-center gap-4">
                       <div className="relative w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden shadow-inner">
-                        <Image alt={entry.title} className="object-cover" src={entry.image_url || 'https://placehold.co/150'} fill sizes="48px" />
+                        <Image alt={entry.title} className="object-cover" src={entry.image_url || 'https://placehold.co//png'} fill sizes="48px" />
                       </div>
                       <div>
                         <p className="font-bold text-slate-900 dark:text-white">{entry.title}</p>

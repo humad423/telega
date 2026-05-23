@@ -43,7 +43,7 @@ export default async function DetailsPage({
     language: entry.language?.toUpperCase() || (locale === 'ar' ? 'عربي' : 'EN'),
     lastUpdated: new Date(entry.created_at).toLocaleDateString(locale === 'ar' ? 'ar-EG' : 'en-US', { month: 'short', year: '2-digit' }),
     tags: [entry.categories?.name, entry.is_verified ? 'Verified' : null].filter(Boolean),
-    image: entry.image_url || 'https://placehold.co/300',
+    image: entry.image_url || 'https://placehold.co//png',
     link: entry.link
   };
 
@@ -236,7 +236,7 @@ export default async function DetailsPage({
                       members: formatMembers(e.members_count),
                       description: e.description,
                       type: e.type,
-                      image: e.image_url || 'https://placehold.co/200'
+                      image: e.image_url || 'https://placehold.co//png'
                     }}
                  />
                ))}
