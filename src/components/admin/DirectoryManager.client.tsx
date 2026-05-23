@@ -9,7 +9,7 @@ import {
     toggleVerified, 
     upsertEntry,
     getTelegramMetadata
-import { getTelegramMetadata } from '@/app/[locale]/admin/actions';
+} from '@/app/[locale]/admin/actions';
 import { createClient } from '@/utils/supabase/client';
 import Image from 'next/image';
 
