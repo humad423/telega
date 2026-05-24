@@ -3,9 +3,9 @@ import React from 'react';
 export default function Loading() {
   return (
     <div className="flex-1 flex flex-col items-center justify-center min-h-[50vh] space-y-4">
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center w-12 h-12">
         {/* Outer glowing ring */}
-        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary/50 animate-spin w-12 h-12"></div>
+        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary/50 animate-spin"></div>
         {/* Inner pulsing dot */}
         <div className="w-4 h-4 bg-primary rounded-full animate-pulse"></div>
       </div>
