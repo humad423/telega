@@ -8,6 +8,47 @@ import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600;
 
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { locale: string, id: string } | Promise<{ locale: string, id: string }>
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  const locale = resolvedParams.locale;
+  const id = decodeURIComponent(resolvedParams.id);
+  const isAr = locale === 'ar';
+
+  const entry = await getEntryBySlug(id, locale);
+  if (!entry) return {};
+
+  const title = isAr
+    ? `تشغيل بوت ${entry.title} تيليجرام - دليل تليجا`
+    : `Start ${entry.title} Telegram Bot - Telega`;
+
+  const description = isAr
+    ? `تصفح تفاصيل ومميزات بوت ${entry.title} على تيليجرام وابدأ استخدامه فوراً. ${entry.description?.slice(0, 120)}...`
+    : `Browse details and start using ${entry.title} bot on Telegram. ${entry.description?.slice(0, 120)}...`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/bots/${id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      images: entry.image_url ? [{ url: entry.image_url }] : [],
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+      images: entry.image_url ? [entry.image_url] : [],
+    }
+  };
+}
+
 export default async function DetailsPage({ 
   params 
 }: { 
@@ -47,8 +88,28 @@ export default async function DetailsPage({
     link: entry.link
   };
 
+  const schemaJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    'name': entry.title,
+    'operatingSystem': 'Telegram',
+    'applicationCategory': 'CommunicationApplication',
+    'description': entry.description,
+    'image': entry.image_url || 'https://placehold.co/png',
+    'url': `https://telega-beryl.vercel.app/${locale}/bots/${id}`,
+    'offers': {
+      '@type': 'Offer',
+      'price': '0',
+      'priceCurrency': 'USD'
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
+      />
       <main className="min-h-screen pt-4 lg:pt-12">
         
         {/* --- 1. Hero Section --- */}

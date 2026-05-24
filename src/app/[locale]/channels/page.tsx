@@ -9,6 +9,38 @@ import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600;
 
+export async function generateMetadata({ 
+  params,
+  searchParams 
+}: { 
+  params: { locale: string } | Promise<{ locale: string }>,
+  searchParams: { page?: string } | Promise<{ page?: string }>
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const locale = resolvedParams.locale;
+  const isAr = locale === 'ar';
+  
+  const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page) : 1;
+  const pageSuffix = page > 1 ? (isAr ? ` - صفحة ${page}` : ` - Page ${page}`) : '';
+
+  const title = isAr
+    ? `قنوات تيليجرام - دليل القنوات النشطة والمميزة${pageSuffix}`
+    : `Telegram Channels - Active & Featured Channels Directory${pageSuffix}`;
+
+  const description = isAr
+    ? `تصفح واستكشف أفضل قنوات تيليجرام المصنفة والنشطة والموثقة في كافة المجالات.${pageSuffix}`
+    : `Browse and explore the best categorized, active, and verified Telegram channels across all fields.${pageSuffix}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/channels`,
+    }
+  };
+}
+
 export default async function ChannelsPage({ 
   params,
   searchParams 

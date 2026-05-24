@@ -10,6 +10,62 @@ import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600;
 
+export async function generateMetadata({ 
+  params,
+  searchParams 
+}: { 
+  params: { locale: string, slug: string } | Promise<{ locale: string, slug: string }>,
+  searchParams: { page?: string } | Promise<{ page?: string }>
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const { locale, slug } = resolvedParams;
+  const isAr = locale === 'ar';
+  
+  const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page) : 1;
+  const pageSuffix = page > 1 ? (isAr ? ` - صفحة ${page}` : ` - Page ${page}`) : '';
+
+  // Fetch category details from DB
+  let categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
+  if (slug === 'all') {
+    categoryName = isAr ? 'الكل' : 'All';
+  } else {
+    let { data: catData } = await supabase
+      .from('categories')
+      .select('name')
+      .eq('slug', slug)
+      .eq('locale', locale)
+      .maybeSingle();
+
+    if (!catData) {
+      const { data: fallbackCat } = await supabase
+        .from('categories')
+        .select('name')
+        .eq('slug', slug)
+        .maybeSingle();
+      catData = fallbackCat;
+    }
+
+    if (catData) categoryName = catData.name;
+  }
+
+  const title = isAr
+    ? `قنوات ومجموعات تيليجرام قسم ${categoryName}${pageSuffix}`
+    : `Telegram Channels & Groups for ${categoryName}${pageSuffix}`;
+
+  const description = isAr
+    ? `تصفح القائمة الكاملة لأفضل قنوات ومجموعات وبوتات تيليجرام المصنفة تحت تصنيف ${categoryName} والمحدثة باستمرار.${pageSuffix}`
+    : `Browse the full list of best Telegram channels, groups, and bots categorized under ${categoryName}, updated regularly.${pageSuffix}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/category/${slug}`,
+    }
+  };
+}
+
 export default async function CategorySlugPage({ 
   params,
   searchParams 

@@ -8,6 +8,47 @@ import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600; // 1 hour
 
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { locale: string, id: string } | Promise<{ locale: string, id: string }>
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  const locale = resolvedParams.locale;
+  const id = decodeURIComponent(resolvedParams.id);
+  const isAr = locale === 'ar';
+
+  const entry = await getEntryBySlug(id, locale);
+  if (!entry) return {};
+
+  const title = isAr
+    ? `رابط انضمام مجموعة ${entry.title} تيليجرام - دليل تليجا`
+    : `Join ${entry.title} Telegram Group Link - Telega`;
+
+  const description = isAr
+    ? `تصفح تفاصيل مجموعة/قروب ${entry.title} على تيليجرام وانضم إليها مباشرة. ${entry.description?.slice(0, 120)}...`
+    : `Browse details and join ${entry.title} group on Telegram. ${entry.description?.slice(0, 120)}...`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/groups/${id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      images: entry.image_url ? [{ url: entry.image_url }] : [],
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+      images: entry.image_url ? [entry.image_url] : [],
+    }
+  };
+}
+
 export default async function DetailsPage({ 
   params 
 }: { 
@@ -47,8 +88,22 @@ export default async function DetailsPage({
     link: entry.link
   };
 
+  const schemaJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'OnlineCommunity',
+    'name': entry.title,
+    'description': entry.description,
+    'image': entry.image_url || 'https://placehold.co/png',
+    'url': `https://telega-beryl.vercel.app/${locale}/groups/${id}`,
+    'memberCount': entry.members_count || 0
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
+      />
       <main className="min-h-screen pt-4 lg:pt-12">
         
         {/* --- 1. Hero Section --- */}

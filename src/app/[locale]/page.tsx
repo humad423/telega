@@ -9,6 +9,23 @@ import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600; // 1 hour
 
+export async function generateMetadata({ params }: { params: { locale: string } | Promise<{ locale: string }> }) {
+  const resolvedParams = await Promise.resolve(params);
+  const locale = resolvedParams.locale;
+  const isAr = locale === 'ar';
+  
+  const title = isAr
+    ? 'الرئيسية - دليل قنوات ومجموعات وبوتات تيليجرام مميزة'
+    : 'Home - Premium Telegram Channels, Groups & Bots Directory';
+
+  return {
+    title,
+    alternates: {
+      canonical: `/${locale}`,
+    }
+  };
+}
+
 export default async function Home({ params }: { params: { locale: string } | Promise<{ locale: string }> }) {
   const resolvedParams = await Promise.resolve(params);
   const locale = resolvedParams.locale;

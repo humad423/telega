@@ -9,6 +9,38 @@ import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600;
 
+export async function generateMetadata({ 
+  params,
+  searchParams 
+}: { 
+  params: { locale: string } | Promise<{ locale: string }>,
+  searchParams: { page?: string } | Promise<{ page?: string }>
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const locale = resolvedParams.locale;
+  const isAr = locale === 'ar';
+  
+  const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page) : 1;
+  const pageSuffix = page > 1 ? (isAr ? ` - صفحة ${page}` : ` - Page ${page}`) : '';
+
+  const title = isAr
+    ? `بوتات تيليجرام - دليل البوتات المفيدة والذكية والحديثة${pageSuffix}`
+    : `Telegram Bots - Useful, Smart & Active Bots Directory${pageSuffix}`;
+
+  const description = isAr
+    ? `تصفح وقارن وجرب أفضل بوتات تيليجرام الخدمية والذكية والمجانية المصنفة والنشطة.${pageSuffix}`
+    : `Browse, compare, and try the best utility, smart, and free Telegram bots, categorized and active.${pageSuffix}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/bots`,
+    }
+  };
+}
+
 export default async function BotsPage({ 
   params,
   searchParams 
