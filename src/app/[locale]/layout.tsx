@@ -9,6 +9,10 @@ import '../globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const tajawal = Tajawal({ subsets: ['arabic'], weight: ['400', '500', '700', '800'], variable: '--font-tajawal' });
 
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ar' }];
+}
+
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode, params: { locale: string } | Promise<{ locale: string }> }) {
   const resolvedParams = await Promise.resolve(params);
   const locale = resolvedParams.locale;
