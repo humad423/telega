@@ -32,26 +32,30 @@ export default async function ChannelsPage({
   const selectedTypes = Array.isArray(resolvedSearchParams.types) ? resolvedSearchParams.types : 
                         typeof resolvedSearchParams.types === 'string' ? [resolvedSearchParams.types] : ['channel'];
 
-  // Fetch real data from Supabase
-  const dbCategories = await getCategories(locale);
+  const itemsPerPage = 12;
+  const offset = (page - 1) * itemsPerPage;
+
+  // Fetch categories and entries in parallel
+  const [dbCategories, entriesResult] = await Promise.all([
+    getCategories(locale),
+    getEntries({
+      locale,
+      types: selectedTypes,
+      categorySlugs: selectedCats,
+      sortBy: sort,
+      isVerified: isVerified,
+      maxMembers,
+      limit: itemsPerPage,
+      offset
+    })
+  ]);
+
   const categoryOptions = dbCategories.map(cat => ({ 
     name: cat.slug, 
     label: cat.name 
   }));
 
-  const itemsPerPage = 12;
-  const offset = (page - 1) * itemsPerPage;
-
-  const { data: entries, count } = await getEntries({
-    locale,
-    types: selectedTypes,
-    categorySlugs: selectedCats,
-    sortBy: sort,
-    isVerified: isVerified,
-    maxMembers,
-    limit: itemsPerPage,
-    offset
-  });
+  const { data: entries, count } = entriesResult;
 
   const totalPages = Math.ceil((count || 0) / itemsPerPage);
 

@@ -14,14 +14,30 @@ export default async function Home({ params }: { params: { locale: string } | Pr
   const locale = resolvedParams.locale;
   const dict = await getDictionary(locale);
 
-  // Fetch real data from Supabase
-  const slides = await getSliderItems(locale);
-  const categories = await getCategories(locale);
-  const { data: featuredData } = await getEntries({ locale, limit: 12, isFeatured: true });
-  const { data: topChannelsData } = await getEntries({ locale, type: 'channel', limit: 6 });
-  const { data: topGroupsData } = await getEntries({ locale, type: 'group', limit: 6 });
-  const { data: topBotsData } = await getEntries({ locale, type: 'bot', limit: 6 });
-  const { data: verifiedData } = await getEntries({ locale, limit: 12, isVerified: true });
+  // Fetch real data from Supabase in parallel for maximum speed
+  const [
+    slides, 
+    categories, 
+    featuredDataResult,
+    topChannelsResult,
+    topGroupsResult,
+    topBotsResult,
+    verifiedDataResult
+  ] = await Promise.all([
+    getSliderItems(locale),
+    getCategories(locale),
+    getEntries({ locale, limit: 12, isFeatured: true }),
+    getEntries({ locale, type: 'channel', limit: 6 }),
+    getEntries({ locale, type: 'group', limit: 6 }),
+    getEntries({ locale, type: 'bot', limit: 6 }),
+    getEntries({ locale, limit: 12, isVerified: true })
+  ]);
+
+  const featuredData = featuredDataResult.data;
+  const topChannelsData = topChannelsResult.data;
+  const topGroupsData = topGroupsResult.data;
+  const topBotsData = topBotsResult.data;
+  const verifiedData = verifiedDataResult.data;
 
   const featured = featuredData || [];
   const topChannels = topChannelsData || [];
