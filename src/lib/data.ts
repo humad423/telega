@@ -1,20 +1,57 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { supabase } from './supabase';
 
-export async function getCategories(locale: string) {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*')
-    .eq('locale', locale)
-    .order('name');
-  
-  if (error) {
-    console.error('Error fetching categories:', error);
-    return [];
-  }
-  return data;
-}
+export const getCategories = cache(async (locale: string) => {
+  return unstable_cache(
+    async () => {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('locale', locale)
+        .order('name');
+      
+      if (error) {
+        console.error('Error fetching categories:', error);
+        return [];
+      }
+      return data || [];
+    },
+    [`categories-${locale}`],
+    { revalidate: 3600, tags: ['categories'] }
+  )();
+});
 
-export async function getEntries({ 
+export const getCategoryBySlug = cache(async (slug: string, locale: string) => {
+  if (slug === 'all') {
+    return { name: locale === 'ar' ? 'الكل' : 'All', slug: 'all' };
+  }
+
+  return unstable_cache(
+    async () => {
+      let { data: catData } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('slug', slug)
+        .eq('locale', locale)
+        .maybeSingle();
+
+      if (!catData) {
+        const { data: fallbackCat } = await supabase
+          .from('categories')
+          .select('*')
+          .eq('slug', slug)
+          .maybeSingle();
+        catData = fallbackCat;
+      }
+      return catData || null;
+    },
+    [`category-${slug}-${locale}`],
+    { revalidate: 3600, tags: ['categories'] }
+  )();
+});
+
+async function rawGetEntries({ 
   locale, 
   type, 
   types,
@@ -53,13 +90,9 @@ export async function getEntries({
     .eq('status', 'approved');
 
   if (search) {
-    // Better or syntax: (title ilike ... OR description ilike ...)
-    // Note: ilike with % wildcards is standard for substring matching
     query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
-    console.log(`[getEntries] Filtering by search: "${search}"`);
   }
 
-  // Apply locale filter: if lang is explicitly set and not 'all', use it; else use page locale
   const effectiveLocale = lang && lang !== 'all' ? lang : locale;
   query = query.eq('locale', effectiveLocale);
 
@@ -88,11 +121,6 @@ export async function getEntries({
   }
 
   if (categorySlug && categorySlug !== 'all') {
-    // In Supabase, if we want to filter by a joined table column, we need to ensure the join is correct.
-    // For many-to-one, we usually filter by the foreign key if it's in the main table.
-    // Assuming 'category_id' exists in 'entries' and we match it with category slug.
-    // However, the current code tries to filter by 'categories.slug'.
-    // Better approach if joining:
     query = query.filter('categories.slug', 'eq', categorySlug);
   }
 
@@ -120,50 +148,98 @@ export async function getEntries({
     console.error('Error fetching entries:', error);
     return { data: [], count: 0 };
   }
-  return { data, count };
+  return { data: data || [], count: count || 0 };
 }
 
-export async function getEntryBySlug(slug: string, locale: string) {
-  // First attempt: match slug and locale
-  let { data, error } = await supabase
-    .from('entries')
-    .select('*, categories(*)')
-    .eq('slug', slug)
-    .eq('locale', locale)
-    .maybeSingle();
+export const getEntries = cache(async (params: Parameters<typeof rawGetEntries>[0]) => {
+  // Generate cache key string from params
+  const cacheKey = JSON.stringify(params);
+  return unstable_cache(
+    async () => rawGetEntries(params),
+    [`entries-${cacheKey}`],
+    { revalidate: 1800, tags: ['entries'] }
+  )();
+});
 
-  // Second attempt fallback: match slug regardless of locale
-  if (!data) {
-    const { data: fallbackData } = await supabase
-      .from('entries')
-      .select('*, categories(*)')
-      .eq('slug', slug)
-      .maybeSingle();
-      
-    if (fallbackData) {
-      data = fallbackData;
-      error = null; // Clear error since we found it
-    }
-  }
+export const getEntryBySlug = cache(async (slug: string, locale: string) => {
+  return unstable_cache(
+    async () => {
+      let { data, error } = await supabase
+        .from('entries')
+        .select('*, categories(*)')
+        .eq('slug', slug)
+        .eq('locale', locale)
+        .maybeSingle();
 
-  if (error && !data) {
-    console.error('Error fetching entry:', error);
-    return null;
-  }
-  return data;
-}
+      if (!data) {
+        const { data: fallbackData } = await supabase
+          .from('entries')
+          .select('*, categories(*)')
+          .eq('slug', slug)
+          .maybeSingle();
+          
+        if (fallbackData) {
+          data = fallbackData;
+          error = null;
+        }
+      }
 
-export async function getSliderItems(locale: string) {
-  const { data, error } = await supabase
-    .from('slider_items')
-    .select('*')
-    .eq('locale', locale)
-    .eq('is_active', true)
-    .order('order_index', { ascending: true });
+      if (error && !data) {
+        console.error('Error fetching entry:', error);
+        return null;
+      }
+      return data;
+    },
+    [`entry-${slug}-${locale}`],
+    { revalidate: 1800, tags: ['entries'] }
+  )();
+});
 
-  if (error) {
-    console.error('Error fetching slider items:', error);
-    return [];
-  }
-  return data;
-}
+export const getPageBySlug = cache(async (slug: string, locale: string) => {
+  return unstable_cache(
+    async () => {
+      let { data: page } = await supabase
+        .from('pages')
+        .select('*')
+        .eq('slug', slug)
+        .eq('locale', locale)
+        .maybeSingle();
+
+      if (!page) {
+        const { data: fallbackPage } = await supabase
+          .from('pages')
+          .select('*')
+          .eq('slug', slug)
+          .maybeSingle();
+        page = fallbackPage;
+      }
+      return page || null;
+    },
+    [`page-${slug}-${locale}`],
+    { revalidate: 3600, tags: ['pages'] }
+  )();
+});
+
+export const getSliderItems = cache(async (locale: string) => {
+  return unstable_cache(
+    async () => {
+      const { data, error } = await supabase
+        .from('slider_items')
+        .select('*')
+        .eq('locale', locale)
+        .eq('is_active', true)
+        .order('order_index', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching slider items:', error);
+        return [];
+      }
+      return data || [];
+    },
+    [`slider-${locale}`],
+    { revalidate: 3600, tags: ['slider'] }
+  )();
+});
+
+
+

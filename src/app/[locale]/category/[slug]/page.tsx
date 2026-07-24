@@ -4,8 +4,7 @@ import Pagination from '@/components/ui/Pagination';
 import SortSelect from '@/components/ui/SortSelect';
 import FilterSidebar from '@/components/ui/FilterSidebar';
 import { getDictionary } from '@/lib/i18n';
-import { getCategories, getEntries } from '@/lib/data';
-import { supabase } from '@/lib/supabase';
+import { getCategories, getEntries, getCategoryBySlug } from '@/lib/data';
 import { formatMembers } from '@/lib/utils';
 
 export const revalidate = 3600;
@@ -19,35 +18,15 @@ export async function generateMetadata({
 }) {
   const resolvedParams = await Promise.resolve(params);
   const resolvedSearchParams = await Promise.resolve(searchParams);
-  const { locale, slug } = resolvedParams;
+  const { locale } = resolvedParams;
+  const slug = decodeURIComponent(resolvedParams.slug);
   const isAr = locale === 'ar';
   
   const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page) : 1;
   const pageSuffix = page > 1 ? (isAr ? ` - صفحة ${page}` : ` - Page ${page}`) : '';
 
-  // Fetch category details from DB
-  let categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
-  if (slug === 'all') {
-    categoryName = isAr ? 'الكل' : 'All';
-  } else {
-    let { data: catData } = await supabase
-      .from('categories')
-      .select('name')
-      .eq('slug', slug)
-      .eq('locale', locale)
-      .maybeSingle();
-
-    if (!catData) {
-      const { data: fallbackCat } = await supabase
-        .from('categories')
-        .select('name')
-        .eq('slug', slug)
-        .maybeSingle();
-      catData = fallbackCat;
-    }
-
-    if (catData) categoryName = catData.name;
-  }
+  const categoryObj = await getCategoryBySlug(slug, locale);
+  const categoryName = categoryObj?.name || (slug === 'all' ? (isAr ? 'الكل' : 'All') : (slug.charAt(0).toUpperCase() + slug.slice(1)));
 
   const title = isAr
     ? `قنوات ومجموعات تيليجرام قسم ${categoryName}${pageSuffix}`
@@ -90,32 +69,10 @@ export default async function CategorySlugPage({
   const extraCategories = Array.isArray(resolvedSearchParams.categories) ? resolvedSearchParams.categories : 
                           typeof resolvedSearchParams.categories === 'string' ? [resolvedSearchParams.categories] : [];
 
-  // Combine the main route category with any extra selected categories from sidebar
   const allCategorySlugs = [slug !== 'all' ? slug : null, ...extraCategories].filter(Boolean) as string[];
 
-  // Fetch actual category from DB
-  let categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
-  if (slug === 'all') {
-    categoryName = dict.catAll;
-  } else {
-    let { data: catData } = await supabase
-      .from('categories')
-      .select('name')
-      .eq('slug', slug)
-      .eq('locale', locale)
-      .maybeSingle();
-
-    if (!catData) {
-      const { data: fallbackCat } = await supabase
-        .from('categories')
-        .select('name')
-        .eq('slug', slug)
-        .maybeSingle();
-      catData = fallbackCat;
-    }
-
-    if (catData) categoryName = catData.name;
-  }
+  const categoryObj = await getCategoryBySlug(slug, locale);
+  const categoryName = categoryObj?.name || (slug === 'all' ? dict.catAll : (slug.charAt(0).toUpperCase() + slug.slice(1)));
 
   // Fetch all categories for the sidebar
   const dbCategories = await getCategories(locale);

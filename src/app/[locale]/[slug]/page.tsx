@@ -1,6 +1,6 @@
-import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import { getDictionary } from '@/lib/i18n';
+import { getPageBySlug } from '@/lib/data';
 
 export const revalidate = 3600;
 
@@ -12,21 +12,7 @@ export async function generateMetadata({
     const resolvedParams = await Promise.resolve(params);
     const { locale, slug } = resolvedParams;
 
-    let { data: page } = await supabase
-        .from('pages')
-        .select('title, content')
-        .eq('slug', slug)
-        .eq('locale', locale)
-        .maybeSingle();
-
-    if (!page) {
-        const { data: fallbackPage } = await supabase
-            .from('pages')
-            .select('title, content')
-            .eq('slug', slug)
-            .maybeSingle();
-        page = fallbackPage;
-    }
+    const page = await getPageBySlug(slug, locale);
 
     if (!page) return {};
 
@@ -58,23 +44,8 @@ export default async function StaticPage({
 }) {
     const resolvedParams = await Promise.resolve(params);
     const { locale, slug } = resolvedParams;
-    const dict = await getDictionary(locale);
 
-    let { data: page } = await supabase
-        .from('pages')
-        .select('*')
-        .eq('slug', slug)
-        .eq('locale', locale)
-        .maybeSingle();
-
-    if (!page) {
-        const { data: fallbackPage } = await supabase
-            .from('pages')
-            .select('*')
-            .eq('slug', slug)
-            .maybeSingle();
-        page = fallbackPage;
-    }
+    const page = await getPageBySlug(slug, locale);
 
     if (!page) notFound();
 

@@ -7,6 +7,7 @@ import { HeaderNav } from './HeaderNav';
 import { HeaderActions } from './HeaderActions';
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
+import { InstantPrefetch } from '@/components/common/InstantPrefetch';
 
 export function SiteShell({ 
     children, 
@@ -125,6 +126,7 @@ export function SiteShell({
 
     return (
         <>
+            <InstantPrefetch />
             <header className="sticky top-0 z-50 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
                 <div className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-4 max-w-[1536px] mx-auto w-full font-['Inter','Tajawal'] antialiased tracking-tight">
                     <div className="flex items-center gap-4 sm:gap-8">
